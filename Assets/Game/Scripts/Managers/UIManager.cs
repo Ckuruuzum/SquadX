@@ -5,9 +5,6 @@ using TMPro;
 
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] private GameObject lobbyMid;
-
-
     [SerializeField] private GameObject squadPanel;
     [SerializeField] private GameObject squadButtonNormal;
     [SerializeField] private GameObject squadButtonFocus;
@@ -21,27 +18,61 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TextMeshProUGUI titleText;
     //[SerializeField] private GameObject 
 
+    private void OnEnable()
+    {
+        GameEvents.OpenCharacterScreen += OpenCharacterPanel;
+    }
+
+    private void OnDisable()
+    {
+        GameEvents.OpenCharacterScreen -= OpenCharacterPanel;
+    }
 
     public void OpenSquadPanel()
     {
-        titleText.text = "SQUAD";
+        if (squadPanel.activeSelf) return;
+        CloseAllPanels();
+
         squadPanel.SetActive(true);
+        titleText.text = "SQUAD";
         squadButtonFocus.SetActive(true);
-        squadButtonNormal.SetActive(false);
-        lobbyMid.SetActive(false);
-        characterPanel.SetActive(false);
-        //lobbyPanel.SetActive(false);
-        playButtonFocus.SetActive(false);
+
     }
 
     public void OpenLobby()
     {
+        if (lobbyPanel.activeSelf) return;
+        CloseAllPanels();
         titleText.text = "LOBBY";
-        lobbyMid.SetActive(true);
+        lobbyPanel.SetActive(true);
         playButtonFocus.SetActive(true);
+        ActivateButtonNormals();
+
+    }
+
+    public void OpenCharacterPanel()
+    {
+        if (characterPanel.activeSelf) return;
+        CloseAllPanels();
+        characterPanel.SetActive(true);
+        squadButtonFocus.SetActive(true);
+        titleText.text = "X";
+
+    }
+
+    public void CloseAllPanels()
+    {
         squadPanel.SetActive(false);
-        squadButtonFocus.SetActive(false);
-        squadButtonNormal.SetActive(true);
         characterPanel.SetActive(false);
+        lobbyPanel.SetActive(false);
+
+        squadButtonFocus.SetActive(false);
+        squadButtonNormal.SetActive(false);
+        playButtonFocus.SetActive(false);
+    }
+
+    private void ActivateButtonNormals()
+    {
+        squadButtonNormal.SetActive(true);
     }
 }
