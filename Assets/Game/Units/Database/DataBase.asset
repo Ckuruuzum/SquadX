@@ -25,29 +25,29 @@ MonoBehaviour:
   bottomBarColorHuman:
     serializedVersion: 2
     rgba: 4281280551
-  cardBackDemon: {fileID: 0}
+  cardBackDemon: {fileID: 21300000, guid: d9736877dbcfa418dbcc898e05656bac, type: 3}
   bottomGlowDemon:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4281538724
   tierTextColorDemon:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4285817343
   tierTextGlowDemon:
     serializedVersion: 2
-    rgba: 0
+    rgba: 3642889122
   bottomBarColorDemon:
     serializedVersion: 2
-    rgba: 0
-  cardBackZombie: {fileID: 0}
+    rgba: 4280357733
+  cardBackZombie: {fileID: 21300000, guid: 46818cd3302f940aba5945759d90fdac, type: 3}
   bottomGlowZombie:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4288102159
   tierTextColorZombie:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4294946337
   tierTextGlowZombie:
     serializedVersion: 2
-    rgba: 0
+    rgba: 2633985899
   bottomBarColorZombie:
     serializedVersion: 2
-    rgba: 0
+    rgba: 4285213704

@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class GameEvents : MonoBehaviour
 {
-    public static Action OpenCharacterScreen;
+    public static Action<Unit> OpenCharacterScreen;
 }

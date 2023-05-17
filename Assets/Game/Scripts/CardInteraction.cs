@@ -7,16 +7,21 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 public class CardInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public Vector3 offset;
-    
+
     private Canvas canvas;
     private bool isDragging;
-    private GameObject startedContainer;
-    private GameObject container;
+    private GameObject tmpContainer;
+
+
+    [SerializeField] private GameObject humanContainer;
+    [SerializeField] private GameObject demonContainer;
+    [SerializeField] private GameObject zombieContainer;
+    private Unit unit;
 
     private void Awake()
     {
         canvas = gameObject.transform.root.GetComponent<Canvas>();
-        startedContainer = gameObject.transform.parent.gameObject;
+        unit = gameObject.transform.GetComponent<UnitDisplay>().unit;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -32,23 +37,27 @@ public class CardInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (container != null && isDragging)
+        if (tmpContainer != null && isDragging)
         {
-            eventData.selectedObject.transform.SetParent(container.gameObject.transform);
-            if (container.name == "BattleHerosContent")
-            {
-                eventData.selectedObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-            }
-            else if (container.name == "SquadContent")
-            {
-                eventData.selectedObject.transform.localScale = new Vector3(0.4f, 0.4f, 0.5f);
-            }
-            container = null;
-        }
-        else if (container == null && isDragging)
-        {
-            eventData.selectedObject.transform.SetParent(startedContainer.gameObject.transform);
+            eventData.selectedObject.transform.SetParent(tmpContainer.gameObject.transform);
 
+            tmpContainer = null;
+        }
+        else if (tmpContainer == null && isDragging)
+        {
+
+            switch (unit.unitRace)
+            {
+                case Unit.UnitRace.HUMAN:
+                    eventData.selectedObject.transform.SetParent(humanContainer.transform);
+                    break;
+                case Unit.UnitRace.DEMON:
+                    eventData.selectedObject.transform.SetParent(demonContainer.transform);
+                    break;
+                case Unit.UnitRace.ZOMBIE:
+                    eventData.selectedObject.transform.SetParent(zombieContainer.transform);
+                    break;
+            }
         }
         isDragging = false;
     }
@@ -57,7 +66,7 @@ public class CardInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         if (isDragging == false)
         {
-            GameEvents.OpenCharacterScreen();
+            GameEvents.OpenCharacterScreen(unit);
         }
     }
 
@@ -81,14 +90,14 @@ public class CardInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     {
         if (collision.TryGetComponent(out BoxCollider2D collider))
         {
-            container = collision.gameObject;
+            tmpContainer = collision.gameObject;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out BoxCollider2D collider))
         {
-            container = null;
+            tmpContainer = null;
         }
     }
 }
