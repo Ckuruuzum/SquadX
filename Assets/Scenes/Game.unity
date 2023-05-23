@@ -1832,7 +1832,7 @@ GameObject:
   - component: {fileID: 328539243}
   - component: {fileID: 328539242}
   m_Layer: 5
-  m_Name: Upgrade
+  m_Name: HealthUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5245,7 +5245,7 @@ GameObject:
   - component: {fileID: 781931195}
   - component: {fileID: 781931194}
   m_Layer: 5
-  m_Name: Text_Defence
+  m_Name: Text_Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7413,7 +7413,7 @@ GameObject:
   - component: {fileID: 1018179694}
   - component: {fileID: 1018179693}
   m_Layer: 5
-  m_Name: Text 2
+  m_Name: UpgradedHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9935,6 +9935,7 @@ MonoBehaviour:
   stagePanel: {fileID: 1306256226}
   levelMaps:
   - {fileID: 3193540481733849840}
+  characterUpgradePanel: {fileID: 7767040189406310594}
   unitIconImage: {fileID: 5904490655866591065}
   unitIconGlowImage: {fileID: 483215151}
   unitNameText: {fileID: 5904490656424494633}
@@ -9951,6 +9952,17 @@ MonoBehaviour:
   unitHealthText: {fileID: 1167114047}
   unitTierText: {fileID: 7865002343666011663}
   unitTierGlow: {fileID: 7865002345415396526}
+  unitIconUpgradeImage: {fileID: 7767040190514155738}
+  unitIconGlowUpgradeImage: {fileID: 1408471411}
+  unitCurrentLevelText: {fileID: 7767040190812512721}
+  unitUpgradedLevelText: {fileID: 7767040190654454525}
+  unitCurrentAttackText: {fileID: 7767040190928775355}
+  unitUpgradedAttackText: {fileID: 7767040190854290914}
+  unitCurrentHealthText: {fileID: 1855906844}
+  unitUpgradedHealthText: {fileID: 1018179693}
+  upgradeTitleText: {fileID: 7767040190028097832}
+  upgradePriceText: {fileID: 7767040189864725851}
+  tmpUnit: {fileID: 0}
 --- !u!4 &1335148456
 Transform:
   m_ObjectHideFlags: 0
@@ -12772,7 +12784,7 @@ GameObject:
   - component: {fileID: 1855906845}
   - component: {fileID: 1855906844}
   m_Layer: 5
-  m_Name: Text 1
+  m_Name: CurrentHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15454,18 +15466,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1232788050}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: SetStageLevelMap
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -25164,7 +25164,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4760213508147391025}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1335148455}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenCharacterUpgradePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4760213508147391025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33574,7 +33586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7767040189406310605}
   m_Layer: 5
-  m_Name: Popup_Upgrade_Car
+  m_Name: Popup_Upgrade_Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33931,7 +33943,7 @@ GameObject:
   - component: {fileID: 7767040189769890844}
   - component: {fileID: 7767040189769890845}
   m_Layer: 5
-  m_Name: Upgrade
+  m_Name: AttackUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34007,7 +34019,7 @@ GameObject:
   - component: {fileID: 7767040189864725850}
   - component: {fileID: 7767040189864725851}
   m_Layer: 5
-  m_Name: Text 2
+  m_Name: Price
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34131,7 +34143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: CHARACTER UPGRADE
+  m_text: UPGRADE Rick
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d9b454495b7d24a7a933eb61bdfa0607, type: 2}
   m_sharedMaterial: {fileID: 7409485994217783921, guid: d9b454495b7d24a7a933eb61bdfa0607,
@@ -34667,7 +34679,7 @@ GameObject:
   - component: {fileID: 7767040190654454524}
   - component: {fileID: 7767040190654454525}
   m_Layer: 5
-  m_Name: Text_7
+  m_Name: UpgradedLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34980,7 +34992,7 @@ GameObject:
   - component: {fileID: 7767040190812512720}
   - component: {fileID: 7767040190812512721}
   m_Layer: 5
-  m_Name: Text_6
+  m_Name: CurrentLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35074,7 +35086,7 @@ GameObject:
   - component: {fileID: 7767040190854290925}
   - component: {fileID: 7767040190854290914}
   m_Layer: 5
-  m_Name: Text 2
+  m_Name: AttackUpgraded
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35230,7 +35242,7 @@ GameObject:
   - component: {fileID: 7767040190928775354}
   - component: {fileID: 7767040190928775355}
   m_Layer: 5
-  m_Name: Text 1
+  m_Name: AttackCurrent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

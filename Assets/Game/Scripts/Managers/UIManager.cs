@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
+    [Header("GeneralPanels")]
     [SerializeField] private GameObject squadPanel;
     [SerializeField] private GameObject squadButtonNormal;
     [SerializeField] private GameObject squadButtonFocus;
@@ -15,6 +16,7 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private GameObject stagePanel;
     [SerializeField] private GameObject[] levelMaps;
+    [SerializeField] private GameObject characterUpgradePanel;
 
 
     [Header("CharacterPanel")]
@@ -29,6 +31,21 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TextMeshProUGUI unitHealthText;
     [SerializeField] private TextMeshProUGUI unitTierText;
     [SerializeField] private Image unitTierGlow;
+
+    [Header("CharacterUpgradePanel")]
+    [SerializeField] private Image unitIconUpgradeImage;
+    [SerializeField] private Image unitIconGlowUpgradeImage;
+    [SerializeField] private TextMeshProUGUI unitCurrentLevelText;
+    [SerializeField] private TextMeshProUGUI unitUpgradedLevelText;
+    [SerializeField] private TextMeshProUGUI unitCurrentAttackText;
+    [SerializeField] private TextMeshProUGUI unitUpgradedAttackText;
+    [SerializeField] private TextMeshProUGUI unitCurrentHealthText;
+    [SerializeField] private TextMeshProUGUI unitUpgradedHealthText;
+    [SerializeField] private TextMeshProUGUI upgradeTitleText;
+    [SerializeField] private TextMeshProUGUI upgradePriceText;
+
+    [Header("Current Unit")]
+    [SerializeField] private Unit tmpUnit;
 
     private void OnEnable()
     {
@@ -70,6 +87,7 @@ public class UIManager : Singleton<UIManager>
         squadButtonFocus.SetActive(true);
         titleText.text = "X";
         SetCharacterPanel(unit);
+        tmpUnit = unit;
     }
 
     public void OpenStagePanel()
@@ -88,12 +106,20 @@ public class UIManager : Singleton<UIManager>
         titleText.text = "LevelMap";
     }
 
+    public void OpenCharacterUpgradePanel()
+    {
+        if (characterUpgradePanel.activeSelf) return;
+        characterUpgradePanel.SetActive(true);
+        SetCharacterUpgradePanel();
+    }
+
     private void CloseAllPanels()
     {
         squadPanel.SetActive(false);
         characterPanel.SetActive(false);
         lobbyPanel.SetActive(false);
         stagePanel.SetActive(false);
+        characterUpgradePanel.SetActive(false);
 
         for (int i = 0; i < levelMaps.Length; i++)
         {
@@ -119,7 +145,7 @@ public class UIManager : Singleton<UIManager>
         unitHealthSlider.value = unit.unitBaseHealth;
         unitAttackText.text = unit.unitBaseDamage.ToString();
         unitHealthText.text = unit.unitBaseHealth.ToString();
-        
+
         switch (unit.unitRace)
         {
             case Unit.UnitRace.HUMAN:
@@ -134,7 +160,7 @@ public class UIManager : Singleton<UIManager>
                 unitTierGlow.color = unit.unitCardDatabase.tierTextGlowDemon;
                 break;
             case Unit.UnitRace.ZOMBIE:
-                unitIconGlowImage.color = unit.unitCardDatabase.bottomGlowZombie;                   
+                unitIconGlowImage.color = unit.unitCardDatabase.bottomGlowZombie;
                 unitTierText.color = unit.unitCardDatabase.tierTextColorZombie;
                 unitTierGlow.color = unit.unitCardDatabase.tierTextGlowZombie;
                 break;
@@ -194,6 +220,34 @@ public class UIManager : Singleton<UIManager>
                 break;
             case Unit.UnitTier.D:
                 unitTierText.text = "D";
+                break;
+        }
+    }
+
+    private void SetCharacterUpgradePanel()
+    {
+
+        unitIconUpgradeImage.sprite = tmpUnit.unitIcon;
+        unitCurrentLevelText.text = tmpUnit.unitLevel.ToString();
+        unitUpgradedLevelText.text = (tmpUnit.unitLevel + 1).ToString();
+        unitCurrentAttackText.text = tmpUnit.unitBaseDamage.ToString(); //Levela göre güncellenicek
+        unitUpgradedAttackText.text = (tmpUnit.unitBaseDamage + 10).ToString(); //Levela göre güncellenicek
+        unitCurrentHealthText.text = tmpUnit.unitBaseHealth.ToString(); //Levela göre güncellenicek
+        unitUpgradedHealthText.text = (tmpUnit.unitBaseHealth + 20).ToString(); //Levela göre güncellenicek
+        upgradeTitleText.text = "UPGRADE " + tmpUnit.unitName;
+        upgradePriceText.text = 100.ToString(); //Levela göre güncellenicek
+
+        switch (tmpUnit.unitRace)
+        {
+            case Unit.UnitRace.HUMAN:
+                unitIconGlowUpgradeImage.color = tmpUnit.unitCardDatabase.bottomGlowHuman;
+
+                break;
+            case Unit.UnitRace.DEMON:
+                unitIconGlowUpgradeImage.color = tmpUnit.unitCardDatabase.bottomGlowDemon;
+                break;
+            case Unit.UnitRace.ZOMBIE:
+                unitIconGlowUpgradeImage.color = tmpUnit.unitCardDatabase.bottomGlowZombie;
                 break;
         }
     }
