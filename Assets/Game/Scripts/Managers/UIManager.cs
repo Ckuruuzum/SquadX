@@ -13,6 +13,8 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private GameObject lobbyPanel;
     [SerializeField] private GameObject playButtonFocus;
     [SerializeField] private TextMeshProUGUI titleText;
+    [SerializeField] private GameObject stagePanel;
+    [SerializeField] private GameObject[] levelMaps;
 
 
     [Header("CharacterPanel")]
@@ -22,9 +24,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private TextMeshProUGUI unitLevelText;
     [SerializeField] private List<GameObject> StarsOn;
     [SerializeField] private Slider unitAttackSlider;
-    [SerializeField] private Slider unithealthSlider;
+    [SerializeField] private Slider unitHealthSlider;
     [SerializeField] private TextMeshProUGUI unitAttackText;
     [SerializeField] private TextMeshProUGUI unitHealthText;
+    [SerializeField] private TextMeshProUGUI unitTierText;
+    [SerializeField] private Image unitTierGlow;
+
     private void OnEnable()
     {
         GameEvents.OpenCharacterScreen += OpenCharacterPanel;
@@ -67,11 +72,33 @@ public class UIManager : Singleton<UIManager>
         SetCharacterPanel(unit);
     }
 
-    public void CloseAllPanels()
+    public void OpenStagePanel()
+    {
+        if (stagePanel.activeSelf) return;
+        CloseAllPanels();
+        stagePanel.SetActive(true);
+        titleText.text = "STAGES";
+        ActivateButtonNormals();
+    }
+
+    public void OpenSelectedLevelMap(GameObject levelMap)
+    {
+        if (levelMap.activeSelf) return;
+        levelMap.SetActive(true);
+        titleText.text = "LevelMap";
+    }
+
+    private void CloseAllPanels()
     {
         squadPanel.SetActive(false);
         characterPanel.SetActive(false);
         lobbyPanel.SetActive(false);
+        stagePanel.SetActive(false);
+
+        for (int i = 0; i < levelMaps.Length; i++)
+        {
+            levelMaps[i].SetActive(false);
+        }
 
         squadButtonFocus.SetActive(false);
         squadButtonNormal.SetActive(false);
@@ -89,19 +116,27 @@ public class UIManager : Singleton<UIManager>
         unitNameText.text = unit.unitName;
         unitLevelText.text = "LEVEL" + "<size=50> " + unit.unitLevel;
         unitAttackSlider.value = unit.unitBaseDamage;
-        unitAttackSlider.value = unit.unitBaseHealth;
+        unitHealthSlider.value = unit.unitBaseHealth;
         unitAttackText.text = unit.unitBaseDamage.ToString();
         unitHealthText.text = unit.unitBaseHealth.ToString();
+        
         switch (unit.unitRace)
         {
             case Unit.UnitRace.HUMAN:
                 unitIconGlowImage.color = unit.unitCardDatabase.bottomGlowHuman;
+                unitTierText.color = unit.unitCardDatabase.tierTextColorHuman;
+                unitTierGlow.color = unit.unitCardDatabase.tierTextGlowHuman;
+
                 break;
             case Unit.UnitRace.DEMON:
                 unitIconGlowImage.color = unit.unitCardDatabase.bottomGlowDemon;
+                unitTierText.color = unit.unitCardDatabase.tierTextColorDemon;
+                unitTierGlow.color = unit.unitCardDatabase.tierTextGlowDemon;
                 break;
             case Unit.UnitRace.ZOMBIE:
-                unitIconGlowImage.color = unit.unitCardDatabase.bottomGlowZombie;             
+                unitIconGlowImage.color = unit.unitCardDatabase.bottomGlowZombie;                   
+                unitTierText.color = unit.unitCardDatabase.tierTextColorZombie;
+                unitTierGlow.color = unit.unitCardDatabase.tierTextGlowZombie;
                 break;
         }
 
@@ -141,6 +176,24 @@ public class UIManager : Singleton<UIManager>
                 {
                     StarsOn[i].SetActive(true);
                 }
+                break;
+        }
+        switch (unit.unitTier)
+        {
+            case Unit.UnitTier.S:
+                unitTierText.text = "S";
+                break;
+            case Unit.UnitTier.A:
+                unitTierText.text = "A";
+                break;
+            case Unit.UnitTier.B:
+                unitTierText.text = "B";
+                break;
+            case Unit.UnitTier.C:
+                unitTierText.text = "C";
+                break;
+            case Unit.UnitTier.D:
+                unitTierText.text = "D";
                 break;
         }
     }
