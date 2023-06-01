@@ -115,6 +115,26 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    public void LoadLevel()
+    {
+        SceneLoader.Instance.LoadScene("Game");
+        
+        switch (_selectedStageRace)
+        {
+            case STAGERACE.Default:
+                break;
+            case STAGERACE.Human:
+                Debug.Log(stages[1].level[1].level);
+                break;
+            case STAGERACE.Demon:
+                break;
+            case STAGERACE.Zombie:
+                break;
+            default:
+                break;
+        }
+        GameManager.Instance.SetGameStart();
+    }
 }
 
 public enum STAGERACE

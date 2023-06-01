@@ -38,6 +38,7 @@ public class UnitDisplay : MonoBehaviour
 
     public void SetCardValues()
     {
+        gameObject.name = unit.name;
         unitNameText.text = unit.unitName;
         cardIconImage.sprite = unit.unitIcon;
         unitLevelText.text = "LEVEL" + "<size=50> " + unit.unitLevel;
@@ -95,7 +96,7 @@ public class UnitDisplay : MonoBehaviour
         }
         switch (unit.unitStarCount)
         {
-            
+
             case Unit.UnitStarCount._1:
                 for (int i = 0; i < 1; i++)
                 {
