@@ -9,8 +9,7 @@ public class GameManager : Singleton<GameManager>
 {
     public List<Unit> deck = new List<Unit>();
 
-    public List<Unit> selectableSquadUnits = new List<Unit>();
-    public List<Unit> reserveSquadUnits = new List<Unit>();
+
 
 
     protected override void Awake()
@@ -50,14 +49,13 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForSeconds(0.5f);
         for (int i = 0; i < deck.Count; i++)
         {
-            if (i <= 4)
+            if (i < 4)
             {
-                selectableSquadUnits.Add(deck[i]);
-                //Debug.Log(selectableSquadUnits[i]);
-                PlayManager.instance.InGameCard[i].unit = selectableSquadUnits[i];
+                PlayManager.instance.selectableSquadUnits.Add(deck[i]);
+                PlayManager.instance.InGameCard[i].unit = PlayManager.instance.selectableSquadUnits[i];
                 PlayManager.instance.InGameCard[i].gameObject.SetActive(true);
             }
-            else reserveSquadUnits.Add(deck[i]);
+            else PlayManager.instance.reserveSquadUnits.Add(deck[i]);
         }
     }
 

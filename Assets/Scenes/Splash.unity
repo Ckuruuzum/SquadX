@@ -215,5 +215,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 46a3fc5c5351ecd458dc79674968b94c, type: 2}
   - {fileID: 11400000, guid: 8f62a3db9cb3c5646897606cb94cdf0b, type: 2}
   - {fileID: 11400000, guid: 8cb455b8db1a96745a3e51d5a3d6a04b, type: 2}
-  selectableSquadUnits: []
-  reserveSquadUnits: []
+  - {fileID: 11400000, guid: 16278b304186d7b49af6c7ec214e481e, type: 2}
+  - {fileID: 11400000, guid: fac5a8f373cd09e4dbca0dd41fe48b9d, type: 2}
+  - {fileID: 11400000, guid: c605a6285fbff3f4e80e78f0a895feff, type: 2}
