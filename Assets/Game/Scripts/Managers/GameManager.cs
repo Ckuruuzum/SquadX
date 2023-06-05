@@ -46,17 +46,18 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator SetGameStartCardsIE()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         for (int i = 0; i < deck.Count; i++)
         {
             if (i < 4)
             {
-                PlayManager.instance.selectableSquadUnits.Add(deck[i]);
-                PlayManager.instance.InGameCard[i].unit = PlayManager.instance.selectableSquadUnits[i];
+                PlayManager.instance.handDeck.Add(deck[i]);
+                PlayManager.instance.InGameCard[i].SetUnit(PlayManager.instance.handDeck[i]);
                 PlayManager.instance.InGameCard[i].gameObject.SetActive(true);
             }
-            else PlayManager.instance.reserveSquadUnits.Add(deck[i]);
+            else PlayManager.instance.reserveDeck.Add(deck[i]);
         }
+        SetNextReservedCard();
     }
 
     private void ShuffleSquad()
@@ -70,4 +71,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void SetNextReservedCard()
+    {
+        PlayManager.instance.nextReservedCard.SetUnit(PlayManager.instance.reserveDeck[0]);
+        PlayManager.instance.nextReservedCard.gameObject.SetActive(true);
+    }
 }

@@ -11,6 +11,7 @@ public class Unit : ScriptableObject
     public string unitDescription;
     public Sprite unitIcon;
     public int unitID;
+    public GameObject unitPrefab;
 
     [Header("Stats")]
     public UnitType unitType;
@@ -19,6 +20,7 @@ public class Unit : ScriptableObject
     public float unitBaseHealth;
     public int unitLevel;
     public int unitExperience;
+    public int staminaCost;
 
     [Header("Label")]
     public UnitStarCount unitStarCount;

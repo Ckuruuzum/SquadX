@@ -7,46 +7,49 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
 {
     public Vector3 offset;
 
-    private Canvas canvas;
-    private bool isDragging;
-    [SerializeField] private GameObject cardContainer;
-    [SerializeField] private GameObject tmpContainer;
-    [SerializeField] private Unit unit;
+    private Canvas _canvas;
+    private bool _isDragging;
+    [SerializeField] private GameObject _cardContainer;
+    [SerializeField] private GameObject _currentSpawnContainer;
+    [SerializeField] private Unit _unit;
 
+    private void Start()
+    {
+        _cardContainer = gameObject.transform.parent.gameObject;
+    }
     private void OnEnable()
     {
-        canvas = gameObject.transform.root.GetComponent<Canvas>();
-        unit = gameObject.transform.GetComponent<UnitDisplay>().unit;
+        _canvas = gameObject.transform.root.GetComponent<Canvas>();
+        _unit = gameObject.transform.GetComponent<UnitDisplay>().Unit;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        isDragging = false;
+        _isDragging = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        isDragging = true;
-        eventData.selectedObject.transform.SetParent(canvas.gameObject.transform);
+        _isDragging = true;
+        eventData.selectedObject.transform.SetParent(_canvas.gameObject.transform);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (tmpContainer != null && isDragging)
+        if (_currentSpawnContainer != null && _isDragging)
         {
-            // eventData.selectedObject.transform.SetParent(tmpContainer.gameObject.transform);
             SpawnCard(eventData);
         }
-        else if (tmpContainer == null && isDragging)
+        else if (_currentSpawnContainer == null && _isDragging)
         {
-            eventData.selectedObject.transform.SetParent(cardContainer.transform);
+            eventData.selectedObject.transform.SetParent(_cardContainer.transform);
         }
-        isDragging = false;
+        _isDragging = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (isDragging == false)
+        if (_isDragging == false)
         {
             // GameEvents.OpenCharacterScreen(unit);
         }
@@ -57,14 +60,14 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
 
         PointerEventData pointerData = (PointerEventData)eventData;
 
-        Vector2 position;
+        Vector2 currentPosition;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            (RectTransform)canvas.transform,
+            (RectTransform)_canvas.transform,
             pointerData.position,
-            canvas.worldCamera,
-            out position);
+            _canvas.worldCamera,
+            out currentPosition);
 
-        transform.position = canvas.transform.TransformPoint(position) + offset;
+        transform.position = _canvas.transform.TransformPoint(currentPosition) + offset;
     }
 
 
@@ -72,50 +75,29 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
     {
         if (collision.TryGetComponent(out BoxCollider2D collider))
         {
-            tmpContainer = collision.gameObject;
+            _currentSpawnContainer = collision.gameObject;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out BoxCollider2D collider))
         {
-            tmpContainer = null;
+            _currentSpawnContainer = null;
         }
     }
 
     private void SpawnCard(PointerEventData eventData)
     {
-        RemoveFromSelectable();
-        AddToReserve();
+        GameEvents.PlayManagerEvents.SpawnUnit(_unit);
         ResetCardStatus(eventData);
-        GameEvents.PlayManagerEvents.RefillSelectable();
     }
 
     private void ResetCardStatus(PointerEventData eventData)
     {
-        eventData.selectedObject.SetActive(false);
-        eventData.selectedObject.transform.SetParent(cardContainer.transform);
-        gameObject.transform.GetComponent<UnitDisplay>().unit = null;
-        tmpContainer = null;
+        eventData.selectedObject.transform.SetParent(_cardContainer.transform);
+        _currentSpawnContainer = null;
     }
 
-    private void AddToReserve()
-    {
-        if (PlayManager.instance.reserveSquadUnits.Contains(unit))
-        {
-            Debug.Log("CAN1");
-        }
-        PlayManager.instance.reserveSquadUnits.Add(unit);
-    }
 
-    private void RemoveFromSelectable()
-    {
-        PlayManager.instance.selectableSquadUnits.Remove(unit);
-
-        if (PlayManager.instance.selectableSquadUnits.Contains(unit))
-        {
-            Debug.Log("CAN2");
-        }
-    }
 
 }

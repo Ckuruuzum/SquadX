@@ -6,6 +6,9 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "Unit", menuName = "SquadX/Database")]
 public class CardDatabase : ScriptableObject
 {
+    [Header("General")]
+    public Sprite staminaBackGround;
+
     [Header("Human")]
     public Sprite cardBackHuman;
     public Color32 bottomGlowHuman;

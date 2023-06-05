@@ -16,12 +16,14 @@ MonoBehaviour:
   unitDescription: "Get w\u0131z g\u0131rt"
   unitIcon: {fileID: 21300000, guid: 776cef056b4044cec86888a5f6a112ae, type: 3}
   unitID: 4
+  unitPrefab: {fileID: 0}
   unitType: 0
   unitRace: 0
   unitBaseDamage: 12
   unitBaseHealth: 60
   unitLevel: 1
   unitExperience: 0
+  staminaCost: 5
   unitStarCount: 2
   unitTier: 4
   unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}

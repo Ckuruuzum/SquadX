@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameEvents : MonoBehaviour
 {
@@ -9,6 +10,6 @@ public class GameEvents : MonoBehaviour
 
     public struct PlayManagerEvents
     {
-        public static Action RefillSelectable;
+        public static Action<Unit> SpawnUnit;
     }
 }

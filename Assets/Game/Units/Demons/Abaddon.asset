@@ -16,12 +16,14 @@ MonoBehaviour:
   unitDescription: 
   unitIcon: {fileID: 21300000, guid: 55dd57caf880e487f954759ce13fd24d, type: 3}
   unitID: 2
+  unitPrefab: {fileID: 0}
   unitType: 0
   unitRace: 1
   unitBaseDamage: 0
   unitBaseHealth: 0
   unitLevel: 1
   unitExperience: 0
+  staminaCost: 2
   unitStarCount: 0
   unitTier: 0
   unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}

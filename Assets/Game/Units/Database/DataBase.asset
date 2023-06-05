@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee2864d56c2d3c498909bb56fe9f93a, type: 3}
   m_Name: DataBase
   m_EditorClassIdentifier: 
+  staminaBackGround: {fileID: 21300000, guid: cf3d7e675c646495ca11197e73ca3b58, type: 3}
   cardBackHuman: {fileID: 21300000, guid: 64c3f26338c7b4f6194ec85a5102f1c9, type: 3}
   bottomGlowHuman:
     serializedVersion: 2

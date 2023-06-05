@@ -8,66 +8,66 @@ public class LobbyCardInteraction : MonoBehaviour, IPointerDownHandler, IPointer
 {
     public Vector3 offset;
 
-    private Canvas canvas;
-    private bool isDragging;
-    private GameObject tmpContainer;
+    private Canvas _canvas;
+    private bool _isDragging;
+    private GameObject _tmpContainer;
 
 
-    [SerializeField] private GameObject humanContainer;
-    [SerializeField] private GameObject demonContainer;
-    [SerializeField] private GameObject zombieContainer;
-    private Unit unit;
+    [SerializeField] private GameObject _humanContainer;
+    [SerializeField] private GameObject _demonContainer;
+    [SerializeField] private GameObject _zombieContainer;
+    private Unit _unit;
 
     private void Awake()
     {
-        canvas = gameObject.transform.root.GetComponent<Canvas>();
-        unit = gameObject.transform.GetComponent<UnitDisplay>().unit;
+        _canvas = gameObject.transform.root.GetComponent<Canvas>();
+        _unit = gameObject.transform.GetComponent<UnitDisplay>().Unit;
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        isDragging = false;
+        _isDragging = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        isDragging = true;
-        eventData.selectedObject.transform.SetParent(canvas.gameObject.transform);
+        _isDragging = true;
+        eventData.selectedObject.transform.SetParent(_canvas.gameObject.transform);
         RemoveCardFromSquad(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (tmpContainer != null && isDragging)
+        if (_tmpContainer != null && _isDragging)
         {
-            eventData.selectedObject.transform.SetParent(tmpContainer.gameObject.transform);
+            eventData.selectedObject.transform.SetParent(_tmpContainer.gameObject.transform);
             AddCardToSquad(eventData);
-            tmpContainer = null;
+            _tmpContainer = null;
         }
-        else if (tmpContainer == null && isDragging)
+        else if (_tmpContainer == null && _isDragging)
         {
 
-            switch (unit.unitRace)
+            switch (_unit.unitRace)
             {
                 case Unit.UnitRace.HUMAN:
-                    eventData.selectedObject.transform.SetParent(humanContainer.transform);
+                    eventData.selectedObject.transform.SetParent(_humanContainer.transform);
                     break;
                 case Unit.UnitRace.DEMON:
-                    eventData.selectedObject.transform.SetParent(demonContainer.transform);
+                    eventData.selectedObject.transform.SetParent(_demonContainer.transform);
                     break;
                 case Unit.UnitRace.ZOMBIE:
-                    eventData.selectedObject.transform.SetParent(zombieContainer.transform);
+                    eventData.selectedObject.transform.SetParent(_zombieContainer.transform);
                     break;
             }
         }
-        isDragging = false;
+        _isDragging = false;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (isDragging == false)
+        if (_isDragging == false)
         {
-            GameEvents.OpenCharacterScreen(unit);
+            GameEvents.OpenCharacterScreen(_unit);
         }
     }
 
@@ -78,12 +78,12 @@ public class LobbyCardInteraction : MonoBehaviour, IPointerDownHandler, IPointer
 
         Vector2 position;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            (RectTransform)canvas.transform,
+            (RectTransform)_canvas.transform,
             pointerData.position,
-            canvas.worldCamera,
+            _canvas.worldCamera,
             out position);
 
-        transform.position = canvas.transform.TransformPoint(position) + offset;
+        transform.position = _canvas.transform.TransformPoint(position) + offset;
     }
 
 
@@ -91,23 +91,23 @@ public class LobbyCardInteraction : MonoBehaviour, IPointerDownHandler, IPointer
     {
         if (collision.TryGetComponent(out BoxCollider2D collider))
         {
-            tmpContainer = collision.gameObject;
+            _tmpContainer = collision.gameObject;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.TryGetComponent(out BoxCollider2D collider))
         {
-            tmpContainer = null;
+            _tmpContainer = null;
         }
     }
 
     private void AddCardToSquad(PointerEventData eventData)
     {
-        GameManager.Instance.deck.Add(eventData.selectedObject.GetComponent<UnitDisplay>().unit); 
+        GameManager.Instance.deck.Add(eventData.selectedObject.GetComponent<UnitDisplay>().Unit); 
     }
     private void RemoveCardFromSquad(PointerEventData eventData)
     {
-        GameManager.Instance.deck.Remove(eventData.selectedObject.GetComponent<UnitDisplay>().unit);
+        GameManager.Instance.deck.Remove(eventData.selectedObject.GetComponent<UnitDisplay>().Unit);
     }
 }

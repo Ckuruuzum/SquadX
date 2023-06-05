@@ -7,7 +7,21 @@ using UnityEngine.UI;
 
 public class UnitDisplay : MonoBehaviour
 {
-    public Unit unit;
+    [SerializeField] private Unit _unit;
+    public Unit Unit
+    {
+        get
+        {
+            return _unit;
+        }
+        set
+        {
+            _unit = value;
+            SetCardValues();
+        }
+    }
+
+
 
     public float unitDamage;
     public float unitHealth;
@@ -22,12 +36,13 @@ public class UnitDisplay : MonoBehaviour
     public TextMeshProUGUI cardTierText;
     public Image cardTierTextGlow;
     public Image cardBottomBar;
+    public Image StaminaBackGround;
 
     public TextMeshProUGUI unitNameText;
     public TextMeshProUGUI unitLevelText;
+    public TextMeshProUGUI unitStaminaText;
     public Slider unitExperienceAmount;
     public List<GameObject> StarsOn;
-
 
 
     private void OnEnable()
@@ -38,39 +53,41 @@ public class UnitDisplay : MonoBehaviour
 
     public void SetCardValues()
     {
-        gameObject.name = unit.name;
-        unitNameText.text = unit.unitName;
-        cardIconImage.sprite = unit.unitIcon;
-        unitLevelText.text = "LEVEL" + "<size=50> " + unit.unitLevel;
+        gameObject.name = Unit.name;
+        unitNameText.text = Unit.unitName;
+        cardIconImage.sprite = Unit.unitIcon;
+        unitLevelText.text = "LEVEL" + "<size=50> " + Unit.unitLevel;
+        unitStaminaText.text = Unit.staminaCost.ToString();
+        StaminaBackGround.sprite = Unit.unitCardDatabase.staminaBackGround;
 
-        switch (unit.unitRace)
+        switch (Unit.unitRace)
         {
             case Unit.UnitRace.HUMAN:
-                cardCardBack.sprite = unit.unitCardDatabase.cardBackHuman;
-                cardbottomGlow.color = unit.unitCardDatabase.bottomGlowHuman;
-                cardTierText.color = unit.unitCardDatabase.tierTextColorHuman;
-                cardTierTextGlow.color = unit.unitCardDatabase.tierTextGlowHuman;
-                cardBottomBar.color = unit.unitCardDatabase.bottomBarColorHuman;
+                cardCardBack.sprite = Unit.unitCardDatabase.cardBackHuman;
+                cardbottomGlow.color = Unit.unitCardDatabase.bottomGlowHuman;
+                cardTierText.color = Unit.unitCardDatabase.tierTextColorHuman;
+                cardTierTextGlow.color = Unit.unitCardDatabase.tierTextGlowHuman;
+                cardBottomBar.color = Unit.unitCardDatabase.bottomBarColorHuman;
                 break;
 
             case Unit.UnitRace.DEMON:
-                cardCardBack.sprite = unit.unitCardDatabase.cardBackDemon;
-                cardbottomGlow.color = unit.unitCardDatabase.bottomGlowDemon;
-                cardTierText.color = unit.unitCardDatabase.tierTextColorDemon;
-                cardTierTextGlow.color = unit.unitCardDatabase.tierTextGlowDemon;
-                cardBottomBar.color = unit.unitCardDatabase.bottomBarColorDemon;
+                cardCardBack.sprite = Unit.unitCardDatabase.cardBackDemon;
+                cardbottomGlow.color = Unit.unitCardDatabase.bottomGlowDemon;
+                cardTierText.color = Unit.unitCardDatabase.tierTextColorDemon;
+                cardTierTextGlow.color = Unit.unitCardDatabase.tierTextGlowDemon;
+                cardBottomBar.color = Unit.unitCardDatabase.bottomBarColorDemon;
                 break;
 
             case Unit.UnitRace.ZOMBIE:
-                cardCardBack.sprite = unit.unitCardDatabase.cardBackZombie;
-                cardbottomGlow.color = unit.unitCardDatabase.bottomGlowZombie;
-                cardTierText.color = unit.unitCardDatabase.tierTextColorZombie;
-                cardTierTextGlow.color = unit.unitCardDatabase.tierTextGlowZombie;
-                cardBottomBar.color = unit.unitCardDatabase.bottomBarColorZombie;
+                cardCardBack.sprite = Unit.unitCardDatabase.cardBackZombie;
+                cardbottomGlow.color = Unit.unitCardDatabase.bottomGlowZombie;
+                cardTierText.color = Unit.unitCardDatabase.tierTextColorZombie;
+                cardTierTextGlow.color = Unit.unitCardDatabase.tierTextGlowZombie;
+                cardBottomBar.color = Unit.unitCardDatabase.bottomBarColorZombie;
                 break;
         }
 
-        switch (unit.unitTier)
+        switch (Unit.unitTier)
         {
             case Unit.UnitTier.S:
                 cardTierText.text = "S";
@@ -94,7 +111,7 @@ public class UnitDisplay : MonoBehaviour
         {
             StarsOn[i].SetActive(false);
         }
-        switch (unit.unitStarCount)
+        switch (Unit.unitStarCount)
         {
 
             case Unit.UnitStarCount._1:
@@ -128,6 +145,16 @@ public class UnitDisplay : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void SetUnitNull()
+    {
+        Unit = null;
+    }
+
+    public void SetUnit(Unit appointedUnit)
+    {
+        Unit = appointedUnit;
     }
 
 }
