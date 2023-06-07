@@ -10,6 +10,6 @@ public class GameEvents : MonoBehaviour
 
     public struct PlayManagerEvents
     {
-        public static Action<Unit> SpawnUnit;
+        public static Action<Unit,PointerEventData> SpawnUnit;
     }
 }

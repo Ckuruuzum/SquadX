@@ -11,7 +11,7 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
     private bool _isDragging;
     [SerializeField] private GameObject _cardContainer;
     [SerializeField] private GameObject _currentSpawnContainer;
-    [SerializeField] private Unit _unit;
+    [SerializeField] private UnitDisplay _unitDisplay;
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
     private void OnEnable()
     {
         _canvas = gameObject.transform.root.GetComponent<Canvas>();
-        _unit = gameObject.transform.GetComponent<UnitDisplay>().Unit;
+        _unitDisplay = gameObject.transform.GetComponent<UnitDisplay>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -88,7 +88,7 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
 
     private void SpawnCard(PointerEventData eventData)
     {
-        GameEvents.PlayManagerEvents.SpawnUnit(_unit);
+        GameEvents.PlayManagerEvents.SpawnUnit(_unitDisplay.Unit, eventData);
         ResetCardStatus(eventData);
     }
 

@@ -19,10 +19,10 @@ public class GameManager : Singleton<GameManager>
     }
     private void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            SetGameStartUnits();
-        }
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    SetGameStartUnits();
+        //}
 
     }
 
@@ -53,7 +53,7 @@ public class GameManager : Singleton<GameManager>
             {
                 PlayManager.instance.handDeck.Add(deck[i]);
                 PlayManager.instance.InGameCard[i].SetUnit(PlayManager.instance.handDeck[i]);
-                PlayManager.instance.InGameCard[i].gameObject.SetActive(true);
+                //PlayManager.instance.InGameCard[i].gameObject.SetActive(true);
             }
             else PlayManager.instance.reserveDeck.Add(deck[i]);
         }
@@ -74,6 +74,5 @@ public class GameManager : Singleton<GameManager>
     private void SetNextReservedCard()
     {
         PlayManager.instance.nextReservedCard.SetUnit(PlayManager.instance.reserveDeck[0]);
-        PlayManager.instance.nextReservedCard.gameObject.SetActive(true);
     }
 }

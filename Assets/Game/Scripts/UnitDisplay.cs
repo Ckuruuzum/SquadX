@@ -53,6 +53,8 @@ public class UnitDisplay : MonoBehaviour
 
     public void SetCardValues()
     {
+        if (Unit is null) return;
+
         gameObject.name = Unit.name;
         unitNameText.text = Unit.unitName;
         cardIconImage.sprite = Unit.unitIcon;

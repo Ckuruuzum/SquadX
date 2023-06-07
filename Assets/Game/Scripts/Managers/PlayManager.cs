@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayManager : MonoBehaviour
 {
@@ -18,32 +19,35 @@ public class PlayManager : MonoBehaviour
 
     private void OnEnable()
     {
-        GameEvents.PlayManagerEvents.SpawnUnit += RefillSelectableCards;
-        GameEvents.PlayManagerEvents.SpawnUnit += AddUsedCardToReserve;
-
+        GameEvents.PlayManagerEvents.SpawnUnit += OrgoniseDeck;
     }
 
     private void OnDisable()
     {
-        GameEvents.PlayManagerEvents.SpawnUnit -= RefillSelectableCards;
-        GameEvents.PlayManagerEvents.SpawnUnit -= AddUsedCardToReserve;
+        GameEvents.PlayManagerEvents.SpawnUnit -= OrgoniseDeck;
     }
 
-    public void RefillSelectableCards(Unit unit)
+    private void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+            SetNextReservedCard();
+        }
+    }
+
+    private void OrgoniseDeck(Unit unit, PointerEventData eventData)
+    {
+        AddUsedCardToReserve(unit);
+        RefillHandDeck(eventData);
+        SetNextReservedCard();
+    }
+
+    public void RefillHandDeck(PointerEventData eventData)
     {
         Unit tmpUnit = reserveDeck[0];
         reserveDeck.Remove(tmpUnit);
         handDeck.Add(tmpUnit);
-        for (int i = 0; i < InGameCard.Count; i++)
-        {
-            if (InGameCard[i].Unit == null)
-            {
-                InGameCard[i].SetUnit(tmpUnit);
-                InGameCard[i].gameObject.SetActive(true);
-                break;
-            }
-        }
-        SetNextReservedCard();
+        eventData.selectedObject.GetComponent<UnitDisplay>().SetUnit(tmpUnit);
     }
 
     private void AddUsedCardToReserve(Unit unit)
@@ -55,8 +59,6 @@ public class PlayManager : MonoBehaviour
 
     private void SetNextReservedCard()
     {
-        nextReservedCard.gameObject.SetActive(false);
         nextReservedCard.SetUnit(reserveDeck[0]);
-        nextReservedCard.gameObject.SetActive(true);
     }
 }
