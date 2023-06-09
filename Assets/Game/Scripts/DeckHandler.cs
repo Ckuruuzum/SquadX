@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class PlayManager : MonoBehaviour
+public class DeckHandler : MonoBehaviour
 {
-    public static PlayManager instance;
-    public StaminaHandler staminaHandler;
+
     public List<UnitDisplay> InGameCard;
     public List<Unit> handDeck = new List<Unit>();
     public List<Unit> reserveDeck = new List<Unit>();
     public UnitDisplay nextReservedCard;
-
-    private void Awake()
-    {
-        instance = this;
-    }
-
-
     public void OrganiseDeck(Unit unit, PointerEventData eventData)
     {
         AddUsedCardToReserve(unit);
