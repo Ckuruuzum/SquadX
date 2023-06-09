@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class PlayManager : MonoBehaviour
 {
     public static PlayManager instance;
+    public StaminaHandler staminaHandler;
     public List<UnitDisplay> InGameCard;
     public List<Unit> handDeck = new List<Unit>();
     public List<Unit> reserveDeck = new List<Unit>();
@@ -17,25 +18,25 @@ public class PlayManager : MonoBehaviour
     }
 
 
-    private void OnEnable()
-    {
-        GameEvents.PlayManagerEvents.SpawnUnit += OrgoniseDeck;
-    }
+    //private void OnEnable()
+    //{
+    //    GameEvents.PlayManagerEvents.SpawnUnit += OrganiseDeck;
+    //}
 
-    private void OnDisable()
-    {
-        GameEvents.PlayManagerEvents.SpawnUnit -= OrgoniseDeck;
-    }
+    //private void OnDisable()
+    //{
+    //    GameEvents.PlayManagerEvents.SpawnUnit -= OrganiseDeck;
+    //}
 
     private void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            SetNextReservedCard();
-        }
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    SetNextReservedCard();
+        //}
     }
 
-    private void OrgoniseDeck(Unit unit, PointerEventData eventData)
+    public void OrganiseDeck(Unit unit, PointerEventData eventData)
     {
         AddUsedCardToReserve(unit);
         RefillHandDeck(eventData);

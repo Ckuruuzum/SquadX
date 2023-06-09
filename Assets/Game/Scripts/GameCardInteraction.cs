@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public Vector3 offset;
 
@@ -47,14 +47,6 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
         _isDragging = false;
     }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (_isDragging == false)
-        {
-            // GameEvents.OpenCharacterScreen(unit);
-        }
-    }
-
     public void OnDrag(PointerEventData eventData)
     {
 
@@ -88,7 +80,8 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IPointerU
 
     private void SpawnCard(PointerEventData eventData)
     {
-        GameEvents.PlayManagerEvents.SpawnUnit(_unitDisplay.Unit, eventData);
+        UnitManager.instance.SpawnUnit(_unitDisplay.Unit, UnitManager.TEAM.Ally);
+        PlayManager.instance.OrganiseDeck(_unitDisplay.Unit, eventData);
         ResetCardStatus(eventData);
     }
 
