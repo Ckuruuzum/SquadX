@@ -9,13 +9,13 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
 
     private Canvas _canvas;
     private bool _isDragging;
-    [SerializeField] private GameObject _cardContainer;
+    [SerializeField] private GameObject _cardTransform;
     [SerializeField] private GameObject _currentSpawnContainer;
     [SerializeField] private UnitDisplay _unitDisplay;
 
     private void Start()
     {
-        _cardContainer = gameObject.transform.parent.gameObject;
+        _cardTransform = gameObject.transform.parent.gameObject;
     }
     private void OnEnable()
     {
@@ -42,7 +42,7 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
         }
         else if (_currentSpawnContainer == null && _isDragging)
         {
-            eventData.selectedObject.transform.SetParent(_cardContainer.transform);
+            eventData.selectedObject.transform.SetParent(_cardTransform.transform);
         }
         _isDragging = false;
     }
@@ -81,14 +81,13 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
     private void SpawnCard(PointerEventData eventData)
     {
         UnitManager.instance.SpawnUnit(_unitDisplay.Unit, UnitManager.TEAM.Ally);
-        PlayManager.instance.OrganiseDeck(_unitDisplay.Unit, eventData);
-        ResetCardStatus(eventData);
+        //PlayManager.instance.OrganiseDeck(_unitDisplay.Unit, eventData);
+        DestroyCard(eventData);
     }
 
-    private void ResetCardStatus(PointerEventData eventData)
+    private void DestroyCard(PointerEventData eventData)
     {
-        eventData.selectedObject.transform.SetParent(_cardContainer.transform);
-        _currentSpawnContainer = null;
+        Destroy(eventData.selectedObject);
     }
 
 

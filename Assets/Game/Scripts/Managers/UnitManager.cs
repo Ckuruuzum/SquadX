@@ -2,11 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UnitManager : MonoBehaviour
 {
     public static UnitManager instance;
     [SerializeField] private StaminaHandler staminaHandler;
+    [SerializeField] private DeckHandler deckHandler;
 
     public TEAM team;
     public Transform allyUnitHolder;
@@ -31,6 +33,7 @@ public class UnitManager : MonoBehaviour
                 {
                     //GameObject tmpUnit = Instantiate(unit.unitPrefab, allyUnitHolder);
                     //allyUnits.Add(tmpUnit);
+                    deckHandler.OrganiseDeck(unit);
                     staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost, TEAM.Ally);
                 }
                 break;

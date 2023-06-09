@@ -133,7 +133,6 @@ public class LevelManager : Singleton<LevelManager>
             default:
                 break;
         }
-        GameManager.Instance.SetGameStart();
     }
 }
 
