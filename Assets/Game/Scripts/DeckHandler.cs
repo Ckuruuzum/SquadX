@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
+using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 public class DeckHandler : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class DeckHandler : MonoBehaviour
 
 
     [SerializeField] private List<Transform> _cardHolders;
+    [SerializeField] private Transform _reservedCardTransform;
 
     private void Start()
     {
@@ -61,10 +64,11 @@ public class DeckHandler : MonoBehaviour
     }
 
 
-    public void OrganiseDeck(Unit unit)
+    public void OrganiseDeck(Unit unit, GameObject cardGo)
     {
-        AddUsedCardToReserve(unit);
+        AddUsedCardToReserve(unit, cardGo);
         RefillHandDeck();
+        SpawnReservedCard();
         SetNextReservedCard();
     }
 
@@ -77,24 +81,39 @@ public class DeckHandler : MonoBehaviour
                 reservedCard.gameObject.transform.DOMove(_cardHolders[i].position, 0.25f);
                 reservedCard.gameObject.transform.DOScale(Vector3.one, 0.25f);
                 reservedCard.GetComponent<GameCardInteraction>().enabled = true;
+                reservedCard.transform.SetParent(_cardHolders[i].transform);
+                reservedCard.GetComponent<GameCardInteraction>().SetCardTransfrom(_cardHolders[i]);
+                Unit tmpUnit = reserveDeck[0];
+                reserveDeck.Remove(tmpUnit);
+                handDeck.Add(tmpUnit);
+                reservedCard = null;
                 break;
             }
         }
-        /* Unit tmpUnit = reserveDeck[0];
-         reserveDeck.Remove(tmpUnit);
-         handDeck.Add(tmpUnit);
-         eventData.selectedObject.GetComponent<UnitDisplay>().SetUnit(tmpUnit);*/
     }
 
-    private void AddUsedCardToReserve(Unit unit)
+    private void SpawnReservedCard()
+    {
+        GameObject tmpReservedCard = Instantiate(_inGameCardPrefab, _reservedCardTransform);
+        tmpReservedCard.transform.DOScale(new Vector3(0.6f, 0.6f, 0.6f), 0);
+        reservedCard = tmpReservedCard.GetComponent<UnitDisplay>();
+    }
+
+    private void AddUsedCardToReserve(Unit unit, GameObject cardGo)
     {
         handDeck.Remove(unit);
         reserveDeck.Add(unit);
+        DestroyCard(cardGo);
     }
 
 
     private void SetNextReservedCard()
     {
         reservedCard.SetUnit(reserveDeck[0]);
+    }
+
+    private void DestroyCard(GameObject cardGo)
+    {
+        Destroy(cardGo);
     }
 }

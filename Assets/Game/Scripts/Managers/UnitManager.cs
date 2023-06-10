@@ -24,7 +24,7 @@ public class UnitManager : MonoBehaviour
     }
 
 
-    public void SpawnUnit(Unit unit, TEAM team)
+    public void SpawnUnit(Unit unit, TEAM team, GameObject cardGo)
     {
         switch (team)
         {
@@ -33,8 +33,12 @@ public class UnitManager : MonoBehaviour
                 {
                     //GameObject tmpUnit = Instantiate(unit.unitPrefab, allyUnitHolder);
                     //allyUnits.Add(tmpUnit);
-                    deckHandler.OrganiseDeck(unit);
+                    deckHandler.OrganiseDeck(unit, cardGo);
                     staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost, TEAM.Ally);
+                }
+                else
+                {
+                    cardGo.GetComponent<GameCardInteraction>().SendDefaultCardPosition(cardGo);
                 }
                 break;
             case TEAM.Enemy:

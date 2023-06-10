@@ -9,13 +9,13 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
 
     private Canvas _canvas;
     private bool _isDragging;
-    [SerializeField] private GameObject _cardTransform;
+    [SerializeField] private Transform _cardTransform;
     [SerializeField] private GameObject _currentSpawnContainer;
     [SerializeField] private UnitDisplay _unitDisplay;
 
     private void Start()
     {
-        _cardTransform = gameObject.transform.parent.gameObject;
+        _cardTransform = gameObject.transform.parent.gameObject.transform;
     }
     private void OnEnable()
     {
@@ -38,11 +38,11 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
     {
         if (_currentSpawnContainer != null && _isDragging)
         {
-            SpawnCard(eventData);
+            SpawnCard(eventData.selectedObject);
         }
         else if (_currentSpawnContainer == null && _isDragging)
         {
-            eventData.selectedObject.transform.SetParent(_cardTransform.transform);
+            SendDefaultCardPosition(gameObject);
         }
         _isDragging = false;
     }
@@ -78,18 +78,21 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
         }
     }
 
-    private void SpawnCard(PointerEventData eventData)
+    private void SpawnCard(GameObject cardGo)
     {
-        UnitManager.instance.SpawnUnit(_unitDisplay.Unit, UnitManager.TEAM.Ally);
-        //PlayManager.instance.OrganiseDeck(_unitDisplay.Unit, eventData);
-        DestroyCard(eventData);
+        UnitManager.instance.SpawnUnit(_unitDisplay.Unit, UnitManager.TEAM.Ally, cardGo);
     }
 
-    private void DestroyCard(PointerEventData eventData)
+    public void SendDefaultCardPosition(GameObject card)
     {
-        Destroy(eventData.selectedObject);
+        card.transform.SetParent(_cardTransform);
+        card.transform.position = _cardTransform.position;
     }
 
+    public void SetCardTransfrom(Transform cardTransform)
+    {
+        _cardTransform = cardTransform;
+    }
 
 
 }
