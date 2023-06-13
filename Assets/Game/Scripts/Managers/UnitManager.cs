@@ -29,7 +29,7 @@ public class UnitManager : MonoBehaviour
         switch (team)
         {
             case TEAM.Ally:
-                if (/*unit.unitPrefab is not null &&*/ staminaHandler.CheckStamina(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost))
+                if (staminaHandler.CheckStamina(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost))
                 {
                     //GameObject tmpUnit = Instantiate(unit.unitPrefab, allyUnitHolder);
                     //allyUnits.Add(tmpUnit);

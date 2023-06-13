@@ -23,7 +23,7 @@ MonoBehaviour:
   unitBaseHealth: 60
   unitLevel: 1
   unitExperience: 0
-  staminaCost: 6
+  staminaCost: 3
   unitStarCount: 1
   unitTier: 1
   unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}
