@@ -11,8 +11,8 @@ public class UnitManager : MonoBehaviour
     [SerializeField] private DeckHandler deckHandler;
 
     public TEAM team;
-    public Transform allyUnitHolder;
-    public Transform enemyUnitHolder;
+    [SerializeField] private Transform _allyUnitHolder;
+    [SerializeField] private Transform _enemyUnitHolder;
 
     public List<GameObject> allyUnits = new List<GameObject>();
     public List<GameObject> enemyUnits = new List<GameObject>();
@@ -31,7 +31,7 @@ public class UnitManager : MonoBehaviour
             case TEAM.Ally:
                 if (staminaHandler.CheckStamina(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost))
                 {
-                    //GameObject tmpUnit = Instantiate(unit.unitPrefab, allyUnitHolder);
+                    //GameObject tmpUnit = Instantiate(unit.unitPrefab, _allyUnitHolder);
                     //allyUnits.Add(tmpUnit);
                     deckHandler.OrganiseDeck(unit, cardGo);
                     staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost, TEAM.Ally);
@@ -44,7 +44,7 @@ public class UnitManager : MonoBehaviour
             case TEAM.Enemy:
                 if (unit.unitPrefab is not null && staminaHandler.CheckStamina(staminaHandler.GetEnemyStaminaValue(), unit.staminaCost))
                 {
-                    GameObject tmpUnit = Instantiate(unit.unitPrefab, enemyUnitHolder);
+                    GameObject tmpUnit = Instantiate(unit.unitPrefab, _enemyUnitHolder);
                     enemyUnits.Add(tmpUnit);
                     staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost, TEAM.Enemy);
                 }

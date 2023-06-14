@@ -1,10 +1,10 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class State
 {
-
     public enum STATE
     {
         IDLE, CHASE, ATTACK, DEAD, SKILL
@@ -15,19 +15,21 @@ public class State
         ENTER, UPDATE, EXIT
     }
 
-    public State state;
+    public STATE name;
     protected EVENT stage;
     protected GameObject npc;
     protected Animator anim;
     protected Transform target;
     protected Unit unit;
     protected State nextState;
-    public State(GameObject npc, Animator anim, Transform target, Unit unit)
+    protected AIPath path;
+    public State(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path)
     {
         this.npc = npc;
         this.anim = anim;
         this.target = target;
         this.unit = unit;
+        this.path = path;
         stage = EVENT.ENTER;
     }
 
