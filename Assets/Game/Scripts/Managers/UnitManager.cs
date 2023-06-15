@@ -58,6 +58,7 @@ public class UnitManager : MonoBehaviour
     public enum TEAM
     {
         Ally = 0,
-        Enemy = 1
+        Enemy = 1,
+        ALLY = 2
     }
 }

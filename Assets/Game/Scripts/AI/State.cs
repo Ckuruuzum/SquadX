@@ -23,13 +23,15 @@ public class State
     protected Unit unit;
     protected State nextState;
     protected AIPath path;
-    public State(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path)
+    protected AI ai;
+    public State(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
     {
         this.npc = npc;
         this.anim = anim;
         this.target = target;
         this.unit = unit;
         this.path = path;
+        this.ai = ai;
         stage = EVENT.ENTER;
     }
 

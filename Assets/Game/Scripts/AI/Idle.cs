@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class Idle : State
 {
-    public Idle(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path)
-        : base(npc, anim, target, unit, path)
+    public Idle(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
+        : base(npc, anim, target, unit, path, ai)
     {
         name = STATE.IDLE;
     }
@@ -14,6 +14,7 @@ public class Idle : State
     public override void Enter()
     {
         anim.SetTrigger("isIdle");
+        Debug.Log("IdleEnter");
         path.canMove = false;
         base.Enter();
 
@@ -21,18 +22,22 @@ public class Idle : State
 
     public override void Update()
     {
-        Debug.Log(target);
-        //if (Random.Range(0, 10000) < 10)
-        //{
-        //    nextState = new Chase(npc, anim, target, unit, path);
-        //    stage = EVENT.EXIT;
-        //}
+        if (Input.GetKeyDown("space"))
+        {
+            nextState = new Chase(npc, anim, target, unit, path, ai);
+            stage = EVENT.EXIT;
+        }
+        if (target == null)
+        {
+            nextState = new Chase(npc, anim, target, unit, path, ai);
+            stage = EVENT.EXIT;
+        }
     }
 
     public override void Exit()
     {
         anim.ResetTrigger("isIdle");
-        Debug.Log("IDLEExit");
+        Debug.Log("IdleExit");
         base.Exit();
     }
 }

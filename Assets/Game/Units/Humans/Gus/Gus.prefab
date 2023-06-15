@@ -2264,6 +2264,7 @@ GameObject:
   - component: {fileID: 6652479819431973420}
   - component: {fileID: 3763732862082156042}
   - component: {fileID: 3763732862082156049}
+  - component: {fileID: 160067830}
   m_Layer: 0
   m_Name: Gus
   m_TagString: Untagged
@@ -2296,12 +2297,12 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848146552881938}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e274402e4c839934c817fc0664347c81, type: 3}
-  m_Controller: {fileID: 9100000, guid: 3d91bf62ed78a6b4a913d031925f5576, type: 2}
-  m_CullingMode: 1
+  m_Controller: {fileID: 9100000, guid: cb562d579a6ffff468f1788400abe606, type: 2}
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -2386,9 +2387,9 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 360
   slowdownDistance: 0.6
-  pickNextWaypointDist: 1.5
-  endReachedDistance: 0.2
-  alwaysDrawGizmos: 0
+  pickNextWaypointDist: 2
+  endReachedDistance: 0.3
+  alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
@@ -2429,6 +2430,20 @@ MonoBehaviour:
   raycastOffset: {x: 0, y: 0, z: 0}
   useGraphRaycasting: 1
   quality: 1
+--- !u!114 &160067830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848146552881938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df3a129d3a04dd941b5dd35ef1fdb224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+  target: {fileID: 0}
 --- !u!1 &1859873861928584
 GameObject:
   m_ObjectHideFlags: 0
