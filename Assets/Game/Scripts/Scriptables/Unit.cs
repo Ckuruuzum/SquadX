@@ -18,9 +18,11 @@ public class Unit : ScriptableObject
     public UnitRace unitRace;
     public float unitBaseDamage;
     public float unitBaseHealth;
+    public float unitBaseMana;
     public int unitLevel;
     public int unitExperience;
     public int staminaCost;
+    public float unitAttackCooldown;
 
     [Header("Label")]
     public UnitStarCount unitStarCount;

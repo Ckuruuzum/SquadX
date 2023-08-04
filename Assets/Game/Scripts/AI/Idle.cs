@@ -22,11 +22,11 @@ public class Idle : State
 
     public override void Update()
     {
-        if (Input.GetKeyDown("space"))
-        {
-            nextState = new Chase(npc, anim, target, unit, path, ai);
-            stage = EVENT.EXIT;
-        }
+        //if (Input.GetKeyDown("space"))
+        //{
+        //    nextState = new Chase(npc, anim, target, unit, path, ai);
+        //    stage = EVENT.EXIT;
+        //}
         if (target == null)
         {
             nextState = new Chase(npc, anim, target, unit, path, ai);

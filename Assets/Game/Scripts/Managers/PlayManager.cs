@@ -9,7 +9,8 @@ public class PlayManager : MonoBehaviour
     [SerializeField] private StaminaHandler staminaHandler;
     [SerializeField] private DeckHandler deckHandler;
 
-
+    public Transform allyBase;
+    public Transform enemyBase;
     private void Awake()
     {
         instance = this;

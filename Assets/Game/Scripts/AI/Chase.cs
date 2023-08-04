@@ -2,7 +2,6 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnitManager;
 
 public class Chase : State
 {
@@ -24,9 +23,6 @@ public class Chase : State
 
     public override void Update()
     {
-        //Debug.Log(npc.GetComponent<AIDestinationSetter>().target);
-
-
         if (DistanceBetweenTarget() < 1 && ai.GetComponent<AIDestinationSetter>().target != null)
         {
             Debug.LogWarning(path.remainingDistance);
@@ -35,7 +31,7 @@ public class Chase : State
         }
         else
         {
-            FindClosestGameObject();
+            FindTarget();
         }
     }
 
@@ -46,27 +42,83 @@ public class Chase : State
         base.Exit();
     }
 
-
-    private Transform FindClosestGameObject()
+    private void FindTarget()
     {
-        GameObject[] enemyUnits = instance.enemyUnits.ToArray();
-        GameObject closestObject = null;
-        float closestDistance = Mathf.Infinity;
-
-        foreach (GameObject units in enemyUnits)
+        Collider[] targets = npc.GetComponent<AI>().hitColliders;
+        for (int i = 0; i < targets.Length; i++)
         {
-            float distance = Vector3.Distance(npc.transform.position, units.transform.position);
-            if (distance < closestDistance)
+            if (targets[i] != null)
             {
-                closestDistance = distance;
-                closestObject = units;
+                FindClosestTarget();
+                break;
             }
-
+            else
+            {
+                if (ai.team == AI.TEAM.ALLY)
+                {
+                    SetTarget(PlayManager.instance.enemyBase);
+                }
+                else if (ai.team == AI.TEAM.ENEMY)
+                {
+                    SetTarget(PlayManager.instance.allyBase);
+                }
+            }
         }
-        target = closestObject.transform;
-        ai.GetComponent<AIDestinationSetter>().target = target;
-        //Debug.LogWarning(target);
-        return target;
+    }
+
+    private Transform FindClosestTarget()
+    {
+        if (ai.team == AI.TEAM.ALLY)
+        {
+            Collider[] enemyUnits = npc.GetComponent<AI>().hitColliders;
+            Collider closestTarget = null;
+            float closestDistance = Mathf.Infinity;
+
+            for (int i = 0; i < enemyUnits.Length; i++)
+            {
+                if (enemyUnits[i] != null)
+                {
+                    float distance = Vector3.Distance(npc.transform.position, enemyUnits[i].transform.position);
+                    if (distance < closestDistance)
+                    {
+                        //closestDistance = distance;
+                        closestTarget = enemyUnits[i];
+                    }
+                    SetTarget(closestTarget.transform);
+                    //Debug.LogWarning(target);
+                    return target;
+                }
+            }
+            return null;
+        }
+        else if (ai.team == AI.TEAM.ENEMY)
+        {
+            Collider[] enemyUnits = npc.GetComponent<AI>().hitColliders;
+            Collider closestTarget = null;
+            float closestDistance = Mathf.Infinity;
+
+            for (int i = 0; i < enemyUnits.Length; i++)
+            {
+                if (enemyUnits[i] != null)
+                {
+                    float distance = Vector3.Distance(npc.transform.position, enemyUnits[i].transform.position);
+                    if (distance < closestDistance)
+                    {
+                        //closestDistance = distance;
+                        closestTarget = enemyUnits[i];
+                    }
+                    SetTarget(closestTarget.transform);
+                    //Debug.LogWarning(target);
+                    return target;
+                }
+            }
+            return null;
+        }
+        else
+            return null;
+
+
+
     }
 
     private float DistanceBetweenTarget()
@@ -74,9 +126,15 @@ public class Chase : State
         if (target != null)
         {
             dist = Vector3.Distance(npc.transform.position, target.position);
-            Debug.Log(dist);
             return dist;
         }
         return 100;
     }
+
+    private void SetTarget(Transform targetTransform)
+    {
+        target = targetTransform;
+        ai.GetComponent<AIDestinationSetter>().target = target;
+    }
+
 }

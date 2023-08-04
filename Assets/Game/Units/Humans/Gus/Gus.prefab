@@ -2265,7 +2265,9 @@ GameObject:
   - component: {fileID: 3763732862082156042}
   - component: {fileID: 3763732862082156049}
   - component: {fileID: 160067830}
-  m_Layer: 0
+  - component: {fileID: 160067831}
+  - component: {fileID: 160067832}
+  m_Layer: 8
   m_Name: Gus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2280,7 +2282,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848146552881938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2442,8 +2444,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3a129d3a04dd941b5dd35ef1fdb224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
-  target: {fileID: 0}
+  unit: {fileID: 11400000, guid: 46a3fc5c5351ecd458dc79674968b94c, type: 2}
+  hitColliders:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  team: 1
+  radius: 5
+--- !u!114 &160067831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848146552881938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5881bdb42f544f1488f51f58743bb188, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 0
+  currentHealth: 0
+  isDead: 0
+--- !u!114 &160067832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848146552881938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 045bc8ab85e910c48931014192edc169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxMana: 0
+  currentMana: 0
 --- !u!1 &1859873861928584
 GameObject:
   m_ObjectHideFlags: 0

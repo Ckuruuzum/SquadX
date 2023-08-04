@@ -31,8 +31,9 @@ public class UnitManager : MonoBehaviour
             case TEAM.Ally:
                 if (staminaHandler.CheckStamina(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost))
                 {
-                    //GameObject tmpUnit = Instantiate(unit.unitPrefab, _allyUnitHolder);
-                    //allyUnits.Add(tmpUnit);
+                    GameObject tmpUnit = Instantiate(unit.unitPrefab, _allyUnitHolder);
+                    allyUnits.Add(tmpUnit);
+                    tmpUnit.GetComponent<AI>().SetUnit(unit, 1, 8);
                     deckHandler.OrganiseDeck(unit, cardGo);
                     staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost, TEAM.Ally);
                 }

@@ -11,10 +11,12 @@ public class Attack : State
         name = STATE.ATTACK;
     }
 
+    private bool _canAttack = true;
+    private float _unitCooldown;
     public override void Enter()
     {
         Debug.Log("AttackEnter");
-        anim.SetTrigger("isAttacking");
+        //anim.SetTrigger("isAttacking");
         path.canMove = false;
         base.Enter();
     }
@@ -22,16 +24,43 @@ public class Attack : State
     public override void Update()
     {
 
-        Debug.LogError(path.remainingDistance);
-        if (Input.GetKeyDown(KeyCode.E))
+        if (_unitCooldown > 0)
         {
-            UnitManager.instance.enemyUnits.Remove(target.gameObject);
-            target = null;
-            nextState = new Idle(npc, anim, target, unit, path, ai);
-            stage = EVENT.EXIT;
+            _unitCooldown -= Time.deltaTime;
+            if (_unitCooldown < 0)
+            {
+                _canAttack = true;
+            }
+        }
 
+        if (target == null)
+        {
+            nextState = new Chase(npc, anim, target, unit, path, ai);
+            stage = EVENT.EXIT;
+        }
+
+        if (target != null && target.TryGetComponent(out IDamageable damageable) && _canAttack == true)
+        {
+            damageable.health.Damage(unit.unitBaseDamage);
+            anim.SetTrigger("isAttacking");
+            _canAttack = false;
+            _unitCooldown = unit.unitAttackCooldown;
+            CheckTargetStatus();
+        }
+
+
+    }
+
+    private void CheckTargetStatus()
+    {
+        if (target.GetComponent<AI>().health.isDead)
+        {
+            target = null;
+            nextState = new Chase(npc, anim, target, unit, path, ai);
+            stage = EVENT.EXIT;
         }
     }
+
 
     public override void Exit()
     {

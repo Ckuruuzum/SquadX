@@ -16,7 +16,7 @@ MonoBehaviour:
   unitDescription: 
   unitIcon: {fileID: 21300000, guid: 63edeb0b7f7214dc38711d5331b5e15f, type: 3}
   unitID: 2
-  unitPrefab: {fileID: 0}
+  unitPrefab: {fileID: 1848146552881938, guid: 2fd8937f38b68ca489883afcef26d14e, type: 3}
   unitType: 0
   unitRace: 1
   unitBaseDamage: 0
