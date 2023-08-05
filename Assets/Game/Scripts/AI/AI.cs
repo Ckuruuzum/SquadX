@@ -17,7 +17,7 @@ public class AI : MonoBehaviour, IDamageable
     private AIPath _path;
     private AIDestinationSetter _destinationSetter;
     private Health _health;
-    private Mana _mana;
+    public Mana mana;
 
     public Health health => _health;
 
@@ -26,7 +26,7 @@ public class AI : MonoBehaviour, IDamageable
         _anim = GetComponent<Animator>();
         _path = GetComponent<AIPath>();
         _health = GetComponent<Health>();
-        _mana = GetComponent<Mana>();
+        mana = GetComponent<Mana>();
         _destinationSetter = GetComponent<AIDestinationSetter>();
         //SetUnit(_unit, 1, 8);
         _currentState = new Idle(gameObject, _anim, _destinationSetter.target, unit, _path, this);
@@ -66,5 +66,11 @@ public class AI : MonoBehaviour, IDamageable
     public void SetStateDead()
     {
         _currentState = new Dead(gameObject, _anim, _destinationSetter.target, unit, _path, this);
+    }
+
+    public void SetStateSkill()
+    {
+        _currentState = new Skill(gameObject, _anim, _destinationSetter.target, unit, _path, this);
+        Debug.Log(_currentState);
     }
 }

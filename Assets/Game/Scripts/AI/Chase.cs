@@ -16,16 +16,16 @@ public class Chase : State
     public override void Enter()
     {
         anim.SetTrigger("isChasing");
-        Debug.Log("ChaseEnter");
+        //Debug.Log("ChaseEnter");
         path.canMove = true;
         base.Enter();
     }
 
     public override void Update()
     {
-        if (DistanceBetweenTarget() < 1 && ai.GetComponent<AIDestinationSetter>().target != null)
+        if (DistanceBetweenTarget() < npc.GetComponent<AIPath>().endReachedDistance && ai.GetComponent<AIDestinationSetter>().target != null)
         {
-            Debug.LogWarning(path.remainingDistance);
+            //Debug.LogWarning(path.remainingDistance);
             nextState = new Attack(npc, anim, target, unit, path, ai);
             stage = EVENT.EXIT;
         }
@@ -38,7 +38,7 @@ public class Chase : State
     public override void Exit()
     {
         anim.ResetTrigger("isChasing");
-        Debug.Log("ChaseExit");
+        //Debug.Log("ChaseExit");
         base.Exit();
     }
 

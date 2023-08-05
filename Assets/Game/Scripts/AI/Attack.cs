@@ -15,7 +15,7 @@ public class Attack : State
     private float _unitCooldown;
     public override void Enter()
     {
-        Debug.Log("AttackEnter");
+        //Debug.Log("AttackEnter");
         //anim.SetTrigger("isAttacking");
         path.canMove = false;
         base.Enter();
@@ -45,6 +45,7 @@ public class Attack : State
             anim.SetTrigger("isAttacking");
             _canAttack = false;
             _unitCooldown = unit.unitAttackCooldown;
+            ai.mana.IncreaseMana(unit.unitBaseDamage * 2);
             CheckTargetStatus();
         }
 
@@ -59,14 +60,26 @@ public class Attack : State
             nextState = new Chase(npc, anim, target, unit, path, ai);
             stage = EVENT.EXIT;
         }
+        else if (ai.mana.currentMana >= ai.mana.maxMana)
+        {
+            nextState = new Skill(npc, anim, target, unit, path, ai);
+            stage = EVENT.EXIT;
+        }
     }
 
 
     public override void Exit()
     {
         anim.ResetTrigger("isAttacking");
-        Debug.Log("AttackExit");
+        //Debug.Log("AttackExit");
         path.canMove = true;
         base.Exit();
+    }
+
+    private float GetAnimationLenght()
+    {
+        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+        float oldLength = state.length;
+        return oldLength;
     }
 }

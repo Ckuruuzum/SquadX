@@ -7,7 +7,7 @@ public class Mana : MonoBehaviour
     public float maxMana;
     public float currentMana;
     private Unit _unit;
-
+    public Spell spell;
     private void Start()
     {
         _unit = GetComponent<AI>().unit;
@@ -26,8 +26,10 @@ public class Mana : MonoBehaviour
         currentMana -= amount;
     }
 
-    public void RegenMana(float amount)
+    public void IncreaseMana(float amount)
     {
         currentMana += amount;
     }
+
+   
 }

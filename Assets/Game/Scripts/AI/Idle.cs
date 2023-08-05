@@ -14,7 +14,7 @@ public class Idle : State
     public override void Enter()
     {
         anim.SetTrigger("isIdle");
-        Debug.Log("IdleEnter");
+        //Debug.Log("IdleEnter");
         path.canMove = false;
         base.Enter();
 
@@ -37,7 +37,7 @@ public class Idle : State
     public override void Exit()
     {
         anim.ResetTrigger("isIdle");
-        Debug.Log("IdleExit");
+        //Debug.Log("IdleExit");
         base.Exit();
     }
 }

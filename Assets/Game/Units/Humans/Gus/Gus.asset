@@ -20,7 +20,7 @@ MonoBehaviour:
   unitType: 0
   unitRace: 0
   unitBaseDamage: 10
-  unitBaseHealth: 60
+  unitBaseHealth: 70
   unitBaseMana: 90
   unitLevel: 1
   unitExperience: 0
