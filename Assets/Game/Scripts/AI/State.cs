@@ -1,4 +1,5 @@
 using Pathfinding;
+using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +25,8 @@ public class State
     protected State nextState;
     protected AIPath path;
     protected AI ai;
-    public State(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
+    protected PuppetMaster puppetMaster;
+    public State(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai, PuppetMaster puppetMaster)
     {
         this.npc = npc;
         this.anim = anim;
@@ -32,6 +34,7 @@ public class State
         this.unit = unit;
         this.path = path;
         this.ai = ai;
+        this.puppetMaster = puppetMaster;
         stage = EVENT.ENTER;
     }
 

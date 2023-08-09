@@ -1,9 +1,12 @@
 using Pathfinding;
+using RootMotion.Dynamics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class AI : MonoBehaviour, IDamageable
 {
@@ -18,8 +21,10 @@ public class AI : MonoBehaviour, IDamageable
     private AIDestinationSetter _destinationSetter;
     private Health _health;
     public Mana mana;
+    public PuppetMaster puppetMaster;
 
     public Health health => _health;
+
 
     private void Start()
     {
@@ -29,7 +34,7 @@ public class AI : MonoBehaviour, IDamageable
         mana = GetComponent<Mana>();
         _destinationSetter = GetComponent<AIDestinationSetter>();
         //SetUnit(_unit, 1, 8);
-        _currentState = new Idle(gameObject, _anim, _destinationSetter.target, unit, _path, this);
+        SetStateIdle();
     }
 
     private void Update()
@@ -49,8 +54,8 @@ public class AI : MonoBehaviour, IDamageable
         this.unit = unit;
         team = (TEAM)teamIndex;
         gameObject.layer = layer;
-
     }
+
 
     private void GetTargetUnits(Vector3 center, float radius)
     {
@@ -65,12 +70,21 @@ public class AI : MonoBehaviour, IDamageable
 
     public void SetStateDead()
     {
-        _currentState = new Dead(gameObject, _anim, _destinationSetter.target, unit, _path, this);
+        _currentState = new Dead(gameObject, _anim, _destinationSetter.target, unit, _path, this, puppetMaster);
     }
 
     public void SetStateSkill()
     {
-        _currentState = new Skill(gameObject, _anim, _destinationSetter.target, unit, _path, this);
-        Debug.Log(_currentState);
+        _currentState = new Skill(gameObject, _anim, _destinationSetter.target, unit, _path, this, puppetMaster);
+    }
+
+    public void SetStateIdle()
+    {
+        _currentState = new Idle(gameObject, _anim, _destinationSetter.target, unit, _path, this, puppetMaster);
+    }
+
+    public void SetStateChase()
+    {
+        _currentState = new Chase(gameObject, _anim, _destinationSetter.target, unit, _path, this, puppetMaster);
     }
 }

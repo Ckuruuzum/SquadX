@@ -1,12 +1,13 @@
 using Pathfinding;
+using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Idle : State
 {
-    public Idle(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
-        : base(npc, anim, target, unit, path, ai)
+    public Idle(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai, PuppetMaster puppetMaster)
+        : base(npc, anim, target, unit, path, ai, puppetMaster)
     {
         name = STATE.IDLE;
     }
@@ -29,7 +30,7 @@ public class Idle : State
         //}
         if (target == null)
         {
-            nextState = new Chase(npc, anim, target, unit, path, ai);
+            nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
             stage = EVENT.EXIT;
         }
     }

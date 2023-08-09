@@ -1,18 +1,22 @@
 using Pathfinding;
+using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Attack : State
 {
-    public Attack(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
-        : base(npc, anim, target, unit, path, ai)
+    public Attack(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai, PuppetMaster puppetMaster)
+        : base(npc, anim, target, unit, path, ai, puppetMaster)
     {
         name = STATE.ATTACK;
     }
 
     private bool _canAttack = true;
     private float _unitCooldown;
+    private bool timeAcquired = false;
+    private float animationLength = 10;
+    private float refreshTimer = 00.25f;
     public override void Enter()
     {
         //Debug.Log("AttackEnter");
@@ -23,6 +27,14 @@ public class Attack : State
 
     public override void Update()
     {
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !timeAcquired)
+        {
+            //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("Skill"));
+            timeAcquired = true;
+            animationLength = GetAnimationLenght();
+            //Debug.Log(animationLength + " skill");
+        }
+
 
         if (_unitCooldown > 0)
         {
@@ -35,18 +47,26 @@ public class Attack : State
 
         if (target == null)
         {
-            nextState = new Chase(npc, anim, target, unit, path, ai);
+            nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
             stage = EVENT.EXIT;
         }
 
         if (target != null && target.TryGetComponent(out IDamageable damageable) && _canAttack == true)
         {
-            damageable.health.Damage(unit.unitBaseDamage);
             anim.SetTrigger("isAttacking");
             _canAttack = false;
             _unitCooldown = unit.unitAttackCooldown;
-            ai.mana.IncreaseMana(unit.unitBaseDamage * 2);
-            CheckTargetStatus();
+            
+        }
+
+        if (refreshTimer >= 0)
+        {
+            refreshTimer -= Time.deltaTime;
+            if (refreshTimer < 0)
+            {
+                refreshTimer = 1f;
+                CheckTargetStatus();
+            }
         }
 
 
@@ -57,12 +77,12 @@ public class Attack : State
         if (target.GetComponent<AI>().health.isDead)
         {
             target = null;
-            nextState = new Chase(npc, anim, target, unit, path, ai);
+            nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
             stage = EVENT.EXIT;
         }
         else if (ai.mana.currentMana >= ai.mana.maxMana)
         {
-            nextState = new Skill(npc, anim, target, unit, path, ai);
+            nextState = new Skill(npc, anim, target, unit, path, ai, puppetMaster);
             stage = EVENT.EXIT;
         }
     }

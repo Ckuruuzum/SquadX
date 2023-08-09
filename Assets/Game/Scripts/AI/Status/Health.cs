@@ -2,6 +2,7 @@ using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Health : MonoBehaviour
 {
@@ -9,9 +10,11 @@ public class Health : MonoBehaviour
     public float currentHealth;
     public bool isDead;
     private Unit _unit;
+    private Transform _target;
 
     private void Start()
     {
+        
         _unit = GetComponent<AI>().unit;
 
         SetMaxHealth();
@@ -53,6 +56,17 @@ public class Health : MonoBehaviour
 
     public void DestroyNPC()
     {
-        Destroy(gameObject);
+        Destroy(gameObject.transform.root.gameObject);
+    }
+    public void AE_Damage()
+    {
+        _target = GetComponent<AIDestinationSetter>().target;
+        if (_target != null && _target.TryGetComponent(out IDamageable damageable))
+        {
+            //Debug.Log("This GO: " + gameObject.name + "Target: " + _target.gameObject.name + "Damagable: " + damageable.health.gameObject.name);
+            damageable.health.Damage(_target.gameObject.GetComponent<AI>().unit.unitBaseDamage);
+            GetComponent<Mana>().IncreaseMana(_unit.unitBaseDamage * 2);
+        }
+
     }
 }

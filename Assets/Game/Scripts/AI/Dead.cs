@@ -1,22 +1,24 @@
 using Pathfinding;
+using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Dead : State
 {
-    public Dead(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
-         : base(npc, anim, target, unit, path, ai)
+    public Dead(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai,PuppetMaster puppetMaster)
+         : base(npc, anim, target, unit, path, ai, puppetMaster)
     {
         name = STATE.DEAD;
     }
 
-    private float animationCooldown = 10;
+    private float animationLength = 10;
     private bool timeAcquired = false;
     public override void Enter()
     {
         //Debug.Log("DeadEnter");
         anim.SetTrigger("isDead");
+        puppetMaster.state = PuppetMaster.State.Dead;
         //Debug.Log(animationCooldown + " asdasdasdasdas");
         path.canMove = false;
         base.Enter();
@@ -29,14 +31,14 @@ public class Dead : State
         {
             
             timeAcquired = true;
-            animationCooldown = GetAnimationLenght();
-            Debug.Log(animationCooldown + " Dead");
+            animationLength = GetAnimationLenght();
+            //Debug.Log(animationLength + " Dead");
         }
 
-        if (animationCooldown >= 0)
+        if (animationLength >= 0)
         {
-            animationCooldown -= Time.deltaTime;
-            if (animationCooldown < 0)
+            animationLength -= Time.deltaTime;
+            if (animationLength < 0)
             {
                 ai.health.DestroyNPC();
             }

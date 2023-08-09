@@ -1,12 +1,13 @@
 using Pathfinding;
+using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Chase : State
 {
-    public Chase(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
-        : base(npc, anim, target, unit, path, ai)
+    public Chase(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai, PuppetMaster puppetMaster)
+        : base(npc, anim, target, unit, path, ai, puppetMaster)
     {
         name = STATE.CHASE;
     }
@@ -26,7 +27,7 @@ public class Chase : State
         if (DistanceBetweenTarget() < npc.GetComponent<AIPath>().endReachedDistance && ai.GetComponent<AIDestinationSetter>().target != null)
         {
             //Debug.LogWarning(path.remainingDistance);
-            nextState = new Attack(npc, anim, target, unit, path, ai);
+            nextState = new Attack(npc, anim, target, unit, path, ai, puppetMaster);
             stage = EVENT.EXIT;
         }
         else

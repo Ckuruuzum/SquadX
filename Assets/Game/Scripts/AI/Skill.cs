@@ -1,4 +1,5 @@
 using Pathfinding;
+using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,20 +7,19 @@ using UnityEngine;
 
 public class Skill : State
 {
-    public Skill(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
-        : base(npc, anim, target, unit, path, ai)
+    public Skill(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai, PuppetMaster puppetMaster)
+        : base(npc, anim, target, unit, path, ai, puppetMaster)
     {
         name = STATE.SKILL;
     }
 
-    private float animationCooldown = 10;
+    private float animationLength = 10;
     private bool timeAcquired = false;
     public override void Enter()
     {
-        Debug.Log("EnteringSkill");
+        //Debug.Log("EnteringSkill");
         anim.SetTrigger("isSkill");
         path.canMove = false;
-        Cast();
         base.Enter();
     }
     public override void Update()
@@ -29,21 +29,21 @@ public class Skill : State
         {
             //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("Skill"));
             timeAcquired = true;
-            animationCooldown = GetAnimationLenght();
+            animationLength = GetAnimationLenght();
             //Debug.Log(animationCooldown + " skill");
         }
 
-        animationCooldown -= Time.deltaTime;
-        if (animationCooldown <= 0)
+        animationLength -= Time.deltaTime;
+        if (animationLength <= 0)
         {
             if (target == null)
             {
-                nextState = new Chase(npc, anim, target, unit, path, ai);
+                nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
                 stage = EVENT.EXIT;
             }
             else
             {
-                nextState = new Attack(npc, anim, target, unit, path, ai);
+                nextState = new Attack(npc, anim, target, unit, path, ai, puppetMaster);
                 stage = EVENT.EXIT;
             }
         }
@@ -56,18 +56,12 @@ public class Skill : State
         base.Exit();
     }
 
-    private void Cast()
-    {
-        ai.mana.currentMana = 0;
-        ai.mana.spell.CastSkill();
-    }
-
     private void CheckTargetStatus()
     {
         if (target.GetComponent<AI>().health.isDead)
         {
             target = null;
-            nextState = new Chase(npc, anim, target, unit, path, ai);
+            nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
             stage = EVENT.EXIT;
         }
     }
