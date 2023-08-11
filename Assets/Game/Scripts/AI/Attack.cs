@@ -51,7 +51,7 @@ public class Attack : State
             stage = EVENT.EXIT;
         }
 
-        if (target != null && target.TryGetComponent(out IDamageable damageable) && _canAttack == true)
+        if (target != null && target.TryGetComponent(out IDamageable damageable) && _canAttack == true && !target.GetComponent<AI>().health.isDead)
         {
             anim.SetTrigger("isAttacking");
             _canAttack = false;

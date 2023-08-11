@@ -1,4 +1,5 @@
 using Pathfinding;
+using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,17 +12,18 @@ public class Health : MonoBehaviour
     public bool isDead;
     private Unit _unit;
     private Transform _target;
+    private PuppetMaster _puppetMaster;
 
     private void Start()
     {
-        
         _unit = GetComponent<AI>().unit;
-
+        _puppetMaster = GetComponent<AI>().puppetMaster;
         SetMaxHealth();
     }
     public void Damage(float amount)
     {
         currentHealth -= amount;
+        AdjustPinWeight();
         if (currentHealth <= 0)
         {
             Kill();
@@ -67,6 +69,22 @@ public class Health : MonoBehaviour
             damageable.health.Damage(_target.gameObject.GetComponent<AI>().unit.unitBaseDamage);
             GetComponent<Mana>().IncreaseMana(_unit.unitBaseDamage * 2);
         }
+    }
 
+    private void AdjustPinWeight()
+    {
+        float tmpRatio = currentHealth / _unit.unitBaseHealth;
+        //Debug.Log("Ratio" + tmpRatio);
+
+        float pinWeightRatio = 0.3f * tmpRatio;
+        //Debug.Log("pinWeightRatio" + pinWeightRatio);
+        float pinWeightAmount = 0.3f - pinWeightRatio;
+        //Debug.Log("pinWeightAmount" + pinWeightAmount);
+        _puppetMaster.pinWeight = _puppetMaster.pinWeight - pinWeightAmount;
+
+        if (_puppetMaster.pinWeight < 0.7f)
+        {
+            _puppetMaster.pinWeight = 0.7f; 
+        }
     }
 }

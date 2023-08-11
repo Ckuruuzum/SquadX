@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class Spell : MonoBehaviour
 {
-    public abstract void CastSkill();
+    public abstract void AE_CastSkill();
 
 }
