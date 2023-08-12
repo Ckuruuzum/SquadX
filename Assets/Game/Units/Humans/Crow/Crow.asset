@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa79abfd933b914693f193775c0b50b, type: 3}
+  m_Name: Crow
+  m_EditorClassIdentifier: 
+  unitName: Crow
+  unitDescription: 
+  unitIcon: {fileID: 0}
+  unitID: 7
+  unitPrefab: {fileID: 917114796614113268, guid: 394c4c83ccd3d584db9f9639d8bd2dce,
+    type: 3}
+  unitType: 1
+  unitRace: 0
+  unitBaseDamage: 5
+  unitBaseHealth: 60
+  unitBaseMana: 50
+  unitLevel: 1
+  unitExperience: 0
+  staminaCost: 0
+  unitAttackCooldown: 1
+  unitStarCount: 0
+  unitTier: 0
+  unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}

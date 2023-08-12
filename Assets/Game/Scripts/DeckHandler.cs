@@ -109,7 +109,7 @@ public class DeckHandler : MonoBehaviour
 
     private void SetNextReservedCard()
     {
-        reservedCard.SetUnit(reserveDeck[0]);
+        //reservedCard.SetUnit(reserveDeck[0]);
     }
 
     private void DestroyCard(GameObject cardGo)
