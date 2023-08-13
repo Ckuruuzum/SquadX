@@ -1,18 +1,30 @@
+using Pathfinding;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrowSkill : MonoBehaviour
+public class CrowSkill : Spell
 {
-    // Start is called before the first frame update
-    void Start()
+    private Transform _target;
+    private Unit _unit;
+    private void Start()
     {
-        
+        _unit = GetComponent<AI>().unit;
+    }
+    public override void AE_CastSkill()
+    {
+        _target = GetComponent<AIDestinationSetter>().target;
+        _target.GetComponent<AI>().health.Damage(25);
+        GetComponent<Mana>().currentMana = 0;
+        CheckTargetStatus();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void CheckTargetStatus()
     {
-        
+        if (_target.GetComponent<AI>().health.isDead)
+        {
+            _target = null;
+            GetComponent<AI>().SetStateChase();
+        }
     }
 }

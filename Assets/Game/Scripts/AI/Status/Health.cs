@@ -66,7 +66,7 @@ public class Health : MonoBehaviour
         if (_target != null && _target.TryGetComponent(out IDamageable damageable))
         {
             //Debug.Log("This GO: " + gameObject.name + "Target: " + _target.gameObject.name + "Damagable: " + damageable.health.gameObject.name);
-            damageable.health.Damage(_target.gameObject.GetComponent<AI>().unit.unitBaseDamage);
+            damageable.health.Damage(_unit.unitBaseDamage);
             GetComponent<Mana>().IncreaseMana(_unit.unitBaseDamage * 2);
         }
     }

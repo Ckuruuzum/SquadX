@@ -20,7 +20,7 @@ MonoBehaviour:
     type: 3}
   unitType: 1
   unitRace: 0
-  unitBaseDamage: 5
+  unitBaseDamage: 3
   unitBaseHealth: 60
   unitBaseMana: 50
   unitLevel: 1
