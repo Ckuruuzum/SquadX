@@ -14,5 +14,6 @@ public class PlayManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        Application.targetFrameRate = 300;
     }
 }
