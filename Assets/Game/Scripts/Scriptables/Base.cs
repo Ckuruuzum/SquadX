@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Base", menuName = "SquadX/Base")]
 public class Base : ScriptableObject
 {
-    public float unitBaseHealth;
-    public float unitBaseHealthRegen;
+    public float baseHealth;
+    public float baseHealthRegen;
 }

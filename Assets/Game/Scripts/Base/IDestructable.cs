@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDestructable
 {
-    Health Health { get; }
+    BaseHealth Health { get; }
 }

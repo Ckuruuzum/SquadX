@@ -26,7 +26,6 @@ public class Chase : State
     {
         if (DistanceBetweenTarget() < npc.GetComponent<AIPath>().endReachedDistance && ai.GetComponent<AIDestinationSetter>().target != null)
         {
-            //Debug.LogWarning(path.remainingDistance);
             nextState = new Attack(npc, anim, target, unit, path, ai, puppetMaster);
             stage = EVENT.EXIT;
         }

@@ -50,24 +50,38 @@ public class Attack : State
             nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
             stage = EVENT.EXIT;
         }
-
-        if (target != null && target.TryGetComponent(out IDamageable damageable) && _canAttack == true && !target.GetComponent<AI>().Health.isDead)
+        else
         {
-            anim.SetTrigger("isAttacking");
-            _canAttack = false;
-            _unitCooldown = unit.unitAttackCooldown;
+            if (_canAttack == true)
+            {
+                if (target.TryGetComponent(out IDamageable damageable) && !target.GetComponent<AI>().Health.isDead)
+                {
+                    anim.SetTrigger("isAttacking");
+                    _canAttack = false;
+                    _unitCooldown = unit.unitAttackCooldown;
+                }
+                else if (target.TryGetComponent(out IDestructable destructable) && !target.GetComponent<BaseController>().Health.isDestroyed)
+                {
+                    anim.SetTrigger("isAttacking");
+                    _canAttack = false;
+                    _unitCooldown = unit.unitAttackCooldown;
+                }
+            }
             
+           
+
+
         }
 
-        if (refreshTimer >= 0)
+        /*if (refreshTimer >= 0)
         {
             refreshTimer -= Time.deltaTime;
             if (refreshTimer < 0)
             {
                 refreshTimer = 1f;
-                CheckTargetStatus();
+                //CheckTargetStatus();
             }
-        }
+        }*/
 
 
     }

@@ -14,7 +14,7 @@ public class TricksterSkill : Spell
     public override void AE_CastSkill()
     {
         _target = GetComponent<AIDestinationSetter>().target;
-        _target.GetComponent<AI>().Health.Damage(50);
+        _target.GetComponent<AI>().Health.ReceiveDamage(50);
         GetComponent<Mana>().currentMana = 0;
         CheckTargetStatus();
     }

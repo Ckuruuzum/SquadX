@@ -2,7 +2,11 @@ using Pathfinding;
 using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using static RootMotion.Demos.CharacterMeleeDemo.Action;
+using static State;
 using static UnityEngine.GraphicsBuffer;
 
 public class Health : MonoBehaviour
@@ -20,7 +24,7 @@ public class Health : MonoBehaviour
         _puppetMaster = GetComponent<AI>().puppetMaster;
         SetMaxHealth();
     }
-    public void Damage(float amount)
+    public void ReceiveDamage(float amount)
     {
         currentHealth -= amount;
         AdjustPinWeight();
@@ -56,6 +60,7 @@ public class Health : MonoBehaviour
         GetComponent<AI>().SetStateDead();
     }
 
+
     public void DestroyRootGo()
     {
         Destroy(gameObject.transform.root.gameObject);
@@ -65,12 +70,13 @@ public class Health : MonoBehaviour
         _target = GetComponent<AIDestinationSetter>().target;
         if (_target != null && _target.TryGetComponent(out IDamageable damageable))
         {
-            damageable.Health.Damage(_unit.unitBaseDamage);
+            damageable.Health.ReceiveDamage(_unit.unitBaseDamage);
             GetComponent<Mana>().IncreaseMana(_unit.unitBaseDamage * 2);
+            CheckTargetStatus(_target);
         }
         else if (_target != null && _target.TryGetComponent(out IDestructable destructable))
         {
-            destructable.Health.Damage(_unit.unitBaseDamage);
+            destructable.Health.ReceiveDamage(_unit.unitBaseDamage);
             GetComponent<Mana>().IncreaseMana(_unit.unitBaseDamage * 2);
         }
     }
@@ -90,7 +96,20 @@ public class Health : MonoBehaviour
 
         if (_puppetMaster.pinWeight < 0.7f)
         {
-            _puppetMaster.pinWeight = 0.7f; 
+            _puppetMaster.pinWeight = 0.7f;
+        }
+    }
+
+    private void CheckTargetStatus(Transform target)
+    {
+        if (target.GetComponent<AI>().Health.isDead)
+        {
+            GetComponent<AIDestinationSetter>().target = null;
+            GetComponent<AI>().SetStateChase();
+        }
+        else if (GetComponent<AI>().mana.currentMana >= GetComponent<AI>().mana.maxMana)
+        {
+            GetComponent<AI>().SetStateSkill();
         }
     }
 }

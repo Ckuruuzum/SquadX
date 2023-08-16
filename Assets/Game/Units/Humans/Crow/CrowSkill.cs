@@ -14,7 +14,7 @@ public class CrowSkill : Spell
     public override void AE_CastSkill()
     {
         _target = GetComponent<AIDestinationSetter>().target;
-        _target.GetComponent<AI>().Health.Damage(25);
+        _target.GetComponent<AI>().Health.ReceiveDamage(25);
         GetComponent<Mana>().currentMana = 0;
         CheckTargetStatus();
     }
