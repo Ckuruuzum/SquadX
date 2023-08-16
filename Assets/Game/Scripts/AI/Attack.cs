@@ -51,7 +51,7 @@ public class Attack : State
             stage = EVENT.EXIT;
         }
 
-        if (target != null && target.TryGetComponent(out IDamageable damageable) && _canAttack == true && !target.GetComponent<AI>().health.isDead)
+        if (target != null && target.TryGetComponent(out IDamageable damageable) && _canAttack == true && !target.GetComponent<AI>().Health.isDead)
         {
             anim.SetTrigger("isAttacking");
             _canAttack = false;
@@ -74,7 +74,7 @@ public class Attack : State
 
     private void CheckTargetStatus()
     {
-        if (target.GetComponent<AI>().health.isDead)
+        if (target.GetComponent<AI>().Health.isDead)
         {
             target = null;
             nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);

@@ -23,7 +23,7 @@ public class AI : MonoBehaviour, IDamageable
     public Mana mana;
     public PuppetMaster puppetMaster;
 
-    public Health health => _health;
+    public Health Health => _health;
 
 
     private void Start()

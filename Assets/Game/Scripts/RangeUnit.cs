@@ -35,9 +35,10 @@ public class RangeUnit : MonoBehaviour
         if (_muzzleFlash != null) _muzzleFlash.Play();
 
         GameObject tmpProjectile = Instantiate(_projectile, _spawnPoint.position, _quaternionOffset, _spawnPoint);
+        //tmpProjectile.transform.SetParent(null);
         tmpProjectile.transform.position = _spawnPoint.position;
         Transform tmpTargetPos = GetComponent<AIDestinationSetter>().target;
-        tmpProjectile.transform.DOMove(new Vector3(tmpTargetPos.position.x, 1, tmpTargetPos.position.z), _bulletSpeed).OnComplete(() =>
+        tmpProjectile.transform.DOMove(new Vector3(tmpTargetPos.position.x, tmpTargetPos.position.y + 1, tmpTargetPos.position.z), _bulletSpeed).OnComplete(() =>
         {
             if (_hitEffect != null)
             {

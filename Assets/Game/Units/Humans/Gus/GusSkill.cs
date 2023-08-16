@@ -20,14 +20,14 @@ public class GusSkill : Spell
     public override void AE_CastSkill()
     {
         _target = GetComponent<AIDestinationSetter>().target;
-        _target.GetComponent<AI>().health.Damage(50);
+        _target.GetComponent<AI>().Health.Damage(50);
         GetComponent<Mana>().currentMana = 0;
         CheckTargetStatus();
     }
 
     private void CheckTargetStatus()
     {
-        if (_target.GetComponent<AI>().health.isDead)
+        if (_target.GetComponent<AI>().Health.isDead)
         {
             _target = null;
             GetComponent<AI>().SetStateChase();

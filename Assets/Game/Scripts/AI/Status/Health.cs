@@ -56,7 +56,7 @@ public class Health : MonoBehaviour
         GetComponent<AI>().SetStateDead();
     }
 
-    public void DestroyNPC()
+    public void DestroyRootGo()
     {
         Destroy(gameObject.transform.root.gameObject);
     }
@@ -65,14 +65,20 @@ public class Health : MonoBehaviour
         _target = GetComponent<AIDestinationSetter>().target;
         if (_target != null && _target.TryGetComponent(out IDamageable damageable))
         {
-            //Debug.Log("This GO: " + gameObject.name + "Target: " + _target.gameObject.name + "Damagable: " + damageable.health.gameObject.name);
-            damageable.health.Damage(_unit.unitBaseDamage);
+            damageable.Health.Damage(_unit.unitBaseDamage);
+            GetComponent<Mana>().IncreaseMana(_unit.unitBaseDamage * 2);
+        }
+        else if (_target != null && _target.TryGetComponent(out IDestructable destructable))
+        {
+            destructable.Health.Damage(_unit.unitBaseDamage);
             GetComponent<Mana>().IncreaseMana(_unit.unitBaseDamage * 2);
         }
     }
 
     private void AdjustPinWeight()
     {
+        if (_puppetMaster == null) return;
+
         float tmpRatio = currentHealth / _unit.unitBaseHealth;
         //Debug.Log("Ratio" + tmpRatio);
 

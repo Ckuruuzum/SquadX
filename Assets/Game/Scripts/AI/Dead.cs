@@ -40,7 +40,7 @@ public class Dead : State
             animationLength -= Time.deltaTime;
             if (animationLength < 0)
             {
-                ai.health.DestroyNPC();
+                ai.Health.DestroyRootGo();
             }
         }
     }

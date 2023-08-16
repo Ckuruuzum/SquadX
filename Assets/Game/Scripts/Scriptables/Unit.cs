@@ -21,7 +21,7 @@ public class Unit : ScriptableObject
     public float unitBaseMana;
     public int unitLevel;
     public int unitExperience;
-    public int staminaCost;
+    public int unitStaminaCost;
     public float unitAttackCooldown;
 
     [Header("Label")]

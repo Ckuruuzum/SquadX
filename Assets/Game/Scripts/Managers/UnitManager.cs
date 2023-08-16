@@ -29,13 +29,13 @@ public class UnitManager : MonoBehaviour
         switch (team)
         {
             case TEAM.Ally:
-                if (staminaHandler.CheckStamina(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost))
+                if (staminaHandler.CheckStamina(staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost))
                 {
                     GameObject tmpUnit = Instantiate(unit.unitPrefab, _allyUnitHolder);
                     allyUnits.Add(tmpUnit);
                     tmpUnit.GetComponent<AI>().SetUnit(unit, 1, 8);
                     deckHandler.OrganiseDeck(unit, cardGo);
-                    staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost, TEAM.Ally);
+                    staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost, TEAM.Ally);
                 }
                 else
                 {
@@ -43,11 +43,11 @@ public class UnitManager : MonoBehaviour
                 }
                 break;
             case TEAM.Enemy:
-                if (unit.unitPrefab is not null && staminaHandler.CheckStamina(staminaHandler.GetEnemyStaminaValue(), unit.staminaCost))
+                if (unit.unitPrefab is not null && staminaHandler.CheckStamina(staminaHandler.GetEnemyStaminaValue(), unit.unitStaminaCost))
                 {
                     GameObject tmpUnit = Instantiate(unit.unitPrefab, _enemyUnitHolder);
                     enemyUnits.Add(tmpUnit);
-                    staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.staminaCost, TEAM.Enemy);
+                    staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost, TEAM.Enemy);
                 }
                 break;
         }

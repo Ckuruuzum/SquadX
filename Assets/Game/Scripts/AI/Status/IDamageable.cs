@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IDamageable 
 {
-    Health health { get; }
+    Health Health { get; }
 }

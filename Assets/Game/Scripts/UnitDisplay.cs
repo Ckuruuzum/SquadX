@@ -59,7 +59,7 @@ public class UnitDisplay : MonoBehaviour
         unitNameText.text = Unit.unitName;
         cardIconImage.sprite = Unit.unitIcon;
         unitLevelText.text = "LEVEL" + "<size=50> " + Unit.unitLevel;
-        unitStaminaText.text = Unit.staminaCost.ToString();
+        unitStaminaText.text = Unit.unitStaminaCost.ToString();
         StaminaBackGround.sprite = Unit.unitCardDatabase.staminaBackGround;
 
         switch (Unit.unitRace)

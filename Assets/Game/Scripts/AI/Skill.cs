@@ -58,7 +58,7 @@ public class Skill : State
 
     private void CheckTargetStatus()
     {
-        if (target.GetComponent<AI>().health.isDead)
+        if (target.GetComponent<AI>().Health.isDead)
         {
             target = null;
             nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
