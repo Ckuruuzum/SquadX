@@ -566,7 +566,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3182935016448330352}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 12.162131, y: 0, z: -8.229006}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3428,7 +3428,7 @@ GameObject:
   - component: {fileID: 3182935017800552139}
   - component: {fileID: 3182935017800552148}
   - component: {fileID: 3182935017800552149}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Crow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3609,11 +3609,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   layerMask:
     serializedVersion: 2
-    m_Bits: 256
-  team: 2
-  radius: 0
+    m_Bits: 128
+  team: 1
   mana: {fileID: 3182935017800552138}
   puppetMaster: {fileID: 3182935017954519416}
 --- !u!114 &3182935017800552137

@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using DG.Tweening;
-using UnityEngine.UIElements;
-using Unity.VisualScripting;
 
 public class DeckHandler : MonoBehaviour
 {
@@ -81,6 +78,7 @@ public class DeckHandler : MonoBehaviour
                 reservedCard.gameObject.transform.DOMove(_cardHolders[i].position, 0.25f);
                 reservedCard.gameObject.transform.DOScale(Vector3.one, 0.25f);
                 reservedCard.GetComponent<GameCardInteraction>().enabled = true;
+                reservedCard.GetComponent<BoxCollider2D>().enabled = true;
                 reservedCard.transform.SetParent(_cardHolders[i].transform);
                 reservedCard.GetComponent<GameCardInteraction>().SetCardTransfrom(_cardHolders[i]);
                 Unit tmpUnit = reserveDeck[0];
@@ -109,7 +107,7 @@ public class DeckHandler : MonoBehaviour
 
     private void SetNextReservedCard()
     {
-        //reservedCard.SetUnit(reserveDeck[0]);
+        reservedCard.SetUnit(reserveDeck[0]);
     }
 
     private void DestroyCard(GameObject cardGo)

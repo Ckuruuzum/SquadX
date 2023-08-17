@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -82,6 +81,10 @@ public class LevelManager : Singleton<LevelManager>
         }
     }
 
+    public int GetFaction()
+    {
+        return (int)_selectedStageRace;
+    }
     public void SelectStage(int stageIndex)
     {
         _selectedStageRace = (STAGERACE)stageIndex;
@@ -114,7 +117,6 @@ public class LevelManager : Singleton<LevelManager>
                 break;
         }
     }
-
     public void LoadLevel()
     {
         SceneLoader.Instance.LoadScene("Game");
@@ -136,6 +138,7 @@ public class LevelManager : Singleton<LevelManager>
     }
 }
 
+[Serializable]
 public enum STAGERACE
 {
     Default = 0,

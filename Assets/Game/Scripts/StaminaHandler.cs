@@ -6,20 +6,23 @@ using UnityEngine.UI;
 
 public class StaminaHandler : MonoBehaviour
 {
+    [Header("Player")]
     public Slider playerStamina;
-    [SerializeField] private float playerStaminaValue;
+    [SerializeField] private float _playerStaminaValue;
+    [SerializeField] private TextMeshProUGUI playerStaminaText;
+    [Space]
+    [Header("Enemy")]
     [SerializeField] private float enemyStaminaValue;
     private int maxStaminaValue = 15;
-    [SerializeField] private TextMeshProUGUI playerStaminaText;
 
     private float playerStaminaRounded;
     private void Update()
     {
-        if (playerStaminaValue < maxStaminaValue)
+        if (_playerStaminaValue < maxStaminaValue)
         {
-            playerStaminaValue = playerStaminaValue + Time.deltaTime / 2;
-            playerStamina.value = playerStaminaValue;
-            playerStaminaRounded = playerStaminaValue;
+            _playerStaminaValue = _playerStaminaValue + Time.deltaTime / 2;
+            playerStamina.value = _playerStaminaValue;
+            playerStaminaRounded = _playerStaminaValue;
             playerStaminaText.text = Mathf.Floor(playerStaminaRounded).ToString();
         }
 
@@ -34,12 +37,12 @@ public class StaminaHandler : MonoBehaviour
     public bool CheckStamina(float staminaValue, int requiredStamina)
     {
         if (requiredStamina > staminaValue) return false;
-        else return true; 
+        else return true;
     }
 
     public float GetPlayerStaminaValue()
     {
-        return playerStaminaValue;
+        return _playerStaminaValue;
     }
 
     public float GetEnemyStaminaValue()
@@ -47,10 +50,10 @@ public class StaminaHandler : MonoBehaviour
         return enemyStaminaValue;
     }
 
-    public void DecreaseStaminaValue(float staminaValue, int requiredStamina,UnitManager.TEAM team)
+    public void DecreaseStaminaValue(float staminaValue, int requiredStamina, UnitManager.TEAM team)
     {
         staminaValue = staminaValue - requiredStamina;
-        if (team == UnitManager.TEAM.Ally) playerStaminaValue = staminaValue;
+        if (team == UnitManager.TEAM.Ally) _playerStaminaValue = staminaValue;
         else enemyStaminaValue = staminaValue;
     }
 

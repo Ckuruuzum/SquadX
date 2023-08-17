@@ -31,6 +31,8 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
     public void OnBeginDrag(PointerEventData eventData)
     {
         _isDragging = true;
+        CameraController.canCameraMove = false;
+        PlayManager.instance.SwitchSpawnBoxStatus();
         eventData.selectedObject.transform.SetParent(_canvas.gameObject.transform);
     }
 
@@ -38,13 +40,15 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
     {
         if (_currentSpawnContainer != null && _isDragging)
         {
-            SpawnCard(eventData.selectedObject);
+            SpawnCard(eventData.selectedObject, _currentSpawnContainer.GetComponent<SpawnBox>().boxIndex);
         }
         else if (_currentSpawnContainer == null && _isDragging)
         {
             SendDefaultCardPosition(gameObject);
         }
         _isDragging = false;
+        CameraController.canCameraMove = true;
+        PlayManager.instance.SwitchSpawnBoxStatus();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -74,13 +78,17 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
     {
         if (collision.TryGetComponent(out BoxCollider2D collider))
         {
-            _currentSpawnContainer = null;
+            if (_currentSpawnContainer == null) return;
+            if (collider.name == _currentSpawnContainer.name)
+            {
+                _currentSpawnContainer = null;
+            }
         }
     }
 
-    private void SpawnCard(GameObject cardGo)
+    private void SpawnCard(GameObject cardGo, int spawnBoxIndex)
     {
-        UnitManager.instance.SpawnUnit(_unitDisplay.Unit, UnitManager.TEAM.Ally, cardGo);
+        UnitManager.instance.SpawnUnit(_unitDisplay.Unit, UnitManager.TEAM.Ally, cardGo, spawnBoxIndex);
     }
 
     public void SendDefaultCardPosition(GameObject card)

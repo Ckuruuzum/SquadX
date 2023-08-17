@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Crow
   unitDescription: 
-  unitIcon: {fileID: 0}
-  unitID: 7
-  unitPrefab: {fileID: 917114796614113268, guid: 394c4c83ccd3d584db9f9639d8bd2dce,
+  unitIcon: {fileID: 21300000, guid: 776cef056b4044cec86888a5f6a112ae, type: 3}
+  unitID: 2
+  unitPrefab: {fileID: 3182935016448330352, guid: 394c4c83ccd3d584db9f9639d8bd2dce,
     type: 3}
   unitType: 1
   unitRace: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
   unitBaseMana: 50
   unitLevel: 1
   unitExperience: 0
-  staminaCost: 0
+  unitStaminaCost: 5
   unitAttackCooldown: 1
   unitStarCount: 0
   unitTier: 0

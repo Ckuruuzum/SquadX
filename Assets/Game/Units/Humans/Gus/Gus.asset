@@ -16,7 +16,8 @@ MonoBehaviour:
   unitDescription: LOLOLO
   unitIcon: {fileID: 21300000, guid: 66f91b0096bee4238b9ddab051776895, type: 3}
   unitID: 1
-  unitPrefab: {fileID: 1848146552881938, guid: 2fd8937f38b68ca489883afcef26d14e, type: 3}
+  unitPrefab: {fileID: 2051531671049048722, guid: 7d3f26dccc0137345ba6b0a5ab575f09,
+    type: 3}
   unitType: 0
   unitRace: 0
   unitBaseDamage: 10
@@ -24,7 +25,7 @@ MonoBehaviour:
   unitBaseMana: 90
   unitLevel: 1
   unitExperience: 0
-  staminaCost: 3
+  unitStaminaCost: 2
   unitAttackCooldown: 5
   unitStarCount: 1
   unitTier: 1

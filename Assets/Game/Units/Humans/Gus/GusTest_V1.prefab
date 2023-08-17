@@ -2269,7 +2269,7 @@ GameObject:
   - component: {fileID: 160067832}
   - component: {fileID: 7139626008972228912}
   m_Layer: 8
-  m_Name: Gus
+  m_Name: GusTest_V1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

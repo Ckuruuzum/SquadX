@@ -16,7 +16,7 @@ public class Attack : State
     private float _unitCooldown;
     private bool timeAcquired = false;
     private float animationLength = 10;
-    private float refreshTimer = 00.25f;
+    //private float refreshTimer = 00.25f;
     public override void Enter()
     {
         //Debug.Log("AttackEnter");

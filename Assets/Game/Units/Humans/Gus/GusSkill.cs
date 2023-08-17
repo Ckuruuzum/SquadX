@@ -2,12 +2,7 @@ using Pathfinding;
 using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using static RootMotion.Demos.CharacterMeleeDemo.Action;
-using static State;
-using static UnityEngine.GraphicsBuffer;
 
 public class GusSkill : Spell
 {

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class AI : MonoBehaviour, IDamageable
 {
@@ -14,7 +13,6 @@ public class AI : MonoBehaviour, IDamageable
     public Collider[] hitColliders = new Collider[10];
     public LayerMask layerMask;
     public TEAM team;
-    public float radius;
     private Animator _anim;
     private State _currentState;
     private AIPath _path;
@@ -49,11 +47,12 @@ public class AI : MonoBehaviour, IDamageable
         DEFAULT = 0, ALLY = 1, ENEMY = 2
     }
 
-    public void SetUnit(Unit unit, int teamIndex, int layer)
+    public void SetUnit(Unit unit, int teamIndex, int layer, string _layerMask)
     {
         this.unit = unit;
         team = (TEAM)teamIndex;
         gameObject.layer = layer;
+        layerMask = LayerMask.GetMask(_layerMask);
     }
 
 
