@@ -10469,8 +10469,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a115158be698a484e9c0bf290682221b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _staminaHandler: {fileID: 0}
-  _deckHandler: {fileID: 0}
   allyBase: {fileID: 6885855}
   enemyBase: {fileID: 866636326}
   spawnBoxContainer: {fileID: 95151220}
@@ -10545,10 +10543,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39418173204d8784c81b354461a60a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_Level: 3
-  player_Experience: 0
+  team: 0
+  ally_Level: 3
+  ally_Experience: 0
   enemy_Level: 3
   enemy_Experience: 0
+  RequiredExpToLevelUp: 0300000005000000080000000c000000100000001400000019000000
 --- !u!114 &767497143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10886,8 +10886,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4f76282ba063ff4aa65814543073b6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaHandler: {fileID: 767497140}
-  deckHandler: {fileID: 767497141}
+  _staminaHandler: {fileID: 767497140}
+  _deckHandler: {fileID: 767497141}
+  levelHandler: {fileID: 767497142}
   team: 0
   _allyUnitHolder: {fileID: 722946637}
   _enemyUnitHolder: {fileID: 1488726020}

@@ -2,13 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class UnitManager : MonoBehaviour
 {
     public static UnitManager instance;
-    [SerializeField] private StaminaHandler staminaHandler;
-    [SerializeField] private DeckHandler deckHandler;
+    [SerializeField] private StaminaHandler _staminaHandler;
+    [SerializeField] private DeckHandler _deckHandler;
+    public LevelHandler levelHandler;
 
     public TEAM team;
     [SerializeField] private Transform _allyUnitHolder;
@@ -31,13 +31,13 @@ public class UnitManager : MonoBehaviour
         switch (team)
         {
             case TEAM.Ally:
-                if (staminaHandler.CheckStamina(staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost))
+                if (_staminaHandler.CheckStamina(_staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost) && allyUnits.Count < levelHandler.ally_Level)
                 {
                     GameObject tmpUnit = Instantiate(unit.unitPrefab, allySpawnPoints[spawnPointIndex].position, Quaternion.identity, _allyUnitHolder);
                     allyUnits.Add(tmpUnit);
                     tmpUnit.transform.GetChild(2).GetComponent<AI>().SetUnit(unit, 1, 8, "EnemyUnit");
-                    deckHandler.OrganiseDeck(unit, cardGo);
-                    staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost, TEAM.Ally);
+                    _deckHandler.OrganiseDeck(unit, cardGo);
+                    _staminaHandler.DecreaseStaminaValue(_staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost, TEAM.Ally);
                 }
                 else
                 {
@@ -45,12 +45,12 @@ public class UnitManager : MonoBehaviour
                 }
                 break;
             case TEAM.Enemy:
-                if (unit.unitPrefab != null && staminaHandler.CheckStamina(staminaHandler.GetEnemyStaminaValue(), unit.unitStaminaCost))
+                if (unit.unitPrefab != null && _staminaHandler.CheckStamina(_staminaHandler.GetEnemyStaminaValue(), unit.unitStaminaCost) && enemyUnits.Count < levelHandler.enemy_Level)
                 {
                     GameObject tmpUnit = Instantiate(unit.unitPrefab, enemySpawnPoints[spawnPointIndex].position, Quaternion.identity, _enemyUnitHolder);
                     enemyUnits.Add(tmpUnit);
                     tmpUnit.transform.GetChild(2).GetComponent<AI>().SetUnit(unit, 2, 7, "AllyUnit");
-                    staminaHandler.DecreaseStaminaValue(staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost, TEAM.Enemy);
+                    _staminaHandler.DecreaseStaminaValue(_staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost, TEAM.Enemy);
                 }
                 break;
         }

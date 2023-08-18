@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 public class PlayManager : MonoBehaviour
 {
     public static PlayManager instance;
-    [SerializeField] private StaminaHandler _staminaHandler;
-    [SerializeField] private DeckHandler _deckHandler;
+    //[SerializeField] private StaminaHandler _staminaHandler;
+    //[SerializeField] private DeckHandler _deckHandler;
 
     public Transform allyBase;
     public Transform enemyBase;
@@ -20,8 +20,8 @@ public class PlayManager : MonoBehaviour
 
     private void Start()
     {
-        _staminaHandler = GetComponent<StaminaHandler>();
-        _deckHandler = GetComponent<DeckHandler>();
+        //_staminaHandler = GetComponent<StaminaHandler>();
+        //_deckHandler = GetComponent<DeckHandler>();
     }
 
     public void SwitchSpawnBoxStatus()
