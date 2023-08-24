@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UnitManager : MonoBehaviour
@@ -19,7 +20,7 @@ public class UnitManager : MonoBehaviour
     public List<Transform> allySpawnPoints = new List<Transform>();
     public List<Transform> enemySpawnPoints = new List<Transform>();
 
-
+    [SerializeField] private TextMeshProUGUI ally_unitCountText;
     private void Awake()
     {
         instance = this;
@@ -38,6 +39,7 @@ public class UnitManager : MonoBehaviour
                     tmpUnit.transform.GetChild(2).GetComponent<AI>().SetUnit(unit, 1, 8, "EnemyUnit");
                     _deckHandler.OrganiseDeck(unit, cardGo);
                     _staminaHandler.DecreaseStaminaValue(_staminaHandler.GetPlayerStaminaValue(), unit.unitStaminaCost, TEAM.Ally);
+                    SetCountText(allyUnits);
                 }
                 else
                 {
@@ -54,8 +56,25 @@ public class UnitManager : MonoBehaviour
                 }
                 break;
         }
+    }
 
-
+    public void RemoveUnit(List<GameObject> list, GameObject unitGameobject,TEAM team)
+    {
+        list.Remove(unitGameobject);
+        if (team == TEAM.Ally)
+        {
+            levelHandler.GainExperience(1, LevelHandler.TEAM.Enemy);
+            SetCountText(allyUnits);
+        }
+        else if (team == TEAM.Enemy)
+        {
+            levelHandler.GainExperience(1, LevelHandler.TEAM.Ally);
+        }
+    }
+    
+    public void SetCountText(List<GameObject> teamList)
+    {
+        ally_unitCountText.text = teamList.Count.ToString();
     }
 
     [Serializable]

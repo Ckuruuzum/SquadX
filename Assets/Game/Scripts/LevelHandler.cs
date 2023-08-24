@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelHandler : MonoBehaviour
@@ -9,6 +10,8 @@ public class LevelHandler : MonoBehaviour
     [Header("Player")]
     public int ally_Level = 3;
     public float ally_Experience;
+    public TextMeshProUGUI ally_LevelText;
+
     [Space]
     [Header("Enemy")]
     public int enemy_Level = 3;
@@ -16,7 +19,7 @@ public class LevelHandler : MonoBehaviour
     private int maxLevelValue = 10;
     [SerializeField] private List<int> RequiredExpToLevelUp;
 
-
+    
 
     public void GainExperience(float amount, TEAM team)
     {
@@ -49,6 +52,7 @@ public class LevelHandler : MonoBehaviour
             {
                 ally_Level = maxLevelValue;
             }
+            SetCapacityText();
         }
         else if (team == TEAM.Enemy)
         {
@@ -59,6 +63,11 @@ public class LevelHandler : MonoBehaviour
             }
         }
 
+    }
+
+    private void SetCapacityText()
+    {
+        ally_LevelText.text = ally_Level.ToString();
     }
 
     [Serializable]

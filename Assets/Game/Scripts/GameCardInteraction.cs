@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
@@ -34,6 +36,7 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
         CameraController.canCameraMove = false;
         PlayManager.instance.SwitchSpawnBoxStatus();
         eventData.selectedObject.transform.SetParent(_canvas.gameObject.transform);
+        SetCardSize(new Vector3(0.5f, 0.5f, 0.5f), 0.25f);
     }
 
     public void OnEndDrag(PointerEventData eventData)
@@ -71,7 +74,12 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
     {
         if (collision.TryGetComponent(out BoxCollider2D collider))
         {
-            _currentSpawnContainer = collision.gameObject;
+            if (_currentSpawnContainer == null)
+            {
+                _currentSpawnContainer = collision.gameObject;
+                _currentSpawnContainer.GetComponent<Image>().color = new Color32(0, 255, 0, 255);
+            }
+
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -81,6 +89,7 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
             if (_currentSpawnContainer == null) return;
             if (collider.name == _currentSpawnContainer.name)
             {
+                _currentSpawnContainer.GetComponent<Image>().color = new Color32(255, 255, 255, 255);
                 _currentSpawnContainer = null;
             }
         }
@@ -95,6 +104,7 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
     {
         card.transform.SetParent(_cardTransform);
         card.transform.position = _cardTransform.position;
+        SetCardSize(new Vector3(1f, 1f, 1f), 0.25f);
     }
 
     public void SetCardTransfrom(Transform cardTransform)
@@ -102,5 +112,8 @@ public class GameCardInteraction : MonoBehaviour, IPointerDownHandler, IBeginDra
         _cardTransform = cardTransform;
     }
 
-
+    private void SetCardSize(Vector3 vector3, float duration)
+    {
+        gameObject.transform.DOScale(vector3, duration);
+    }
 }

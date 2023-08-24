@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public float moveSpeed = 5.0f;
     public static bool canCameraMove = true;
+    //public Vector3 offset;
     public Vector3 maxXZLimits = new Vector2(10.0f, 10.0f); // Adjust these values as needed
 
     private Vector3 dragOrigin;
@@ -23,16 +24,17 @@ public class CameraController : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 Vector3 difference = Input.mousePosition - dragOrigin;
-                Vector3 newPosition = transform.position - new Vector3(difference.x, 0, difference.y) * Time.deltaTime * moveSpeed;
+                Vector3 newPosition = transform.position - new Vector3(difference.x, 0, 0) * Time.deltaTime * moveSpeed;
+                //Debug.Log(new Vector3(difference.x, 0, difference.z));
 
                 newPosition.x = Mathf.Clamp(newPosition.x, -maxXZLimits.x, maxXZLimits.x);
-                newPosition.z = Mathf.Clamp(newPosition.z, -maxXZLimits.y, maxXZLimits.y);
+                //newPosition.z = Mathf.Clamp(newPosition.z, -maxXZLimits.z, maxXZLimits.z);
 
                 transform.position = newPosition;
 
                 dragOrigin = Input.mousePosition;
             }
         }
-       
+
     }
 }

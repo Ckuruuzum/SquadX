@@ -45,13 +45,15 @@ public class Health : MonoBehaviour
         Destroy(gameObject.GetComponent<Collider>());
         if (GetComponent<AI>().team == AI.TEAM.ALLY)
         {
-            UnitManager.instance.allyUnits.Remove(gameObject.transform.parent.gameObject);
-            UnitManager.instance.levelHandler.GainExperience(1, LevelHandler.TEAM.Enemy);
+            UnitManager.instance.RemoveUnit(UnitManager.instance.allyUnits, gameObject.transform.parent.gameObject, UnitManager.TEAM.Ally);
+            //UnitManager.instance.allyUnits.Remove(gameObject.transform.parent.gameObject);
+            
         }
         else if (GetComponent<AI>().team == AI.TEAM.ENEMY)
         {
-            UnitManager.instance.enemyUnits.Remove(gameObject.transform.parent.gameObject);
-            UnitManager.instance.levelHandler.GainExperience(1, LevelHandler.TEAM.Ally);
+            UnitManager.instance.RemoveUnit(UnitManager.instance.enemyUnits, gameObject.transform.parent.gameObject, UnitManager.TEAM.Enemy);
+            //UnitManager.instance.enemyUnits.Remove(gameObject.transform.parent.gameObject);
+            //UnitManager.instance.levelHandler.GainExperience(1, LevelHandler.TEAM.Ally);
         }
         GetComponent<AI>().SetStateDead();
     }

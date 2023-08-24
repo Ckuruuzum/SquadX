@@ -1,7 +1,9 @@
+using DG.Tweening;
 using Pathfinding;
 using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Attack : State
@@ -29,12 +31,10 @@ public class Attack : State
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !timeAcquired)
         {
-            //Debug.Log(anim.GetCurrentAnimatorStateInfo(0).IsName("Skill"));
             timeAcquired = true;
             animationLength = GetAnimationLenght();
-            //Debug.Log(animationLength + " skill");
         }
-
+       
 
         if (_unitCooldown > 0)
         {
@@ -52,8 +52,11 @@ public class Attack : State
         }
         else
         {
+            FaceTarget();
             if (_canAttack == true)
             {
+                //FaceTarget();
+
                 if (target.TryGetComponent(out IDamageable damageable) && !target.GetComponent<AI>().Health.isDead)
                 {
                     anim.SetTrigger("isAttacking");
@@ -84,6 +87,11 @@ public class Attack : State
         }*/
 
 
+    }
+
+    private void FaceTarget()
+    {
+        npc.transform.LookAt(new Vector3(target.position.x, npc.transform.position.y, target.position.z));
     }
 
     private void CheckTargetStatus()
