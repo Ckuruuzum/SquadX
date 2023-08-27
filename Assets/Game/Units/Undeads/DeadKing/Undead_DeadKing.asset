@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa79abfd933b914693f193775c0b50b, type: 3}
+  m_Name: Undead_DeadKing
+  m_EditorClassIdentifier: 
+  unitName: Dead King
+  unitDescription: 
+  unitIcon: {fileID: 21300000, guid: 57bf0e89b960641a38bb5904785d70d6, type: 3}
+  unitID: 202
+  unitPrefab: {fileID: 3460464083343822715, guid: fc099bd11948b974193742b46e1c5663,
+    type: 3}
+  unitType: 0
+  unitRace: 2
+  unitBaseDamage: 25
+  unitBaseHealth: 140
+  unitBaseMana: 1000
+  unitLevel: 1
+  unitExperience: 0
+  unitStaminaCost: 6
+  unitAttackCooldown: 2
+  unitStarCount: 0
+  unitTier: 0
+  unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}
