@@ -52,7 +52,7 @@ public class Attack : State
         else
         {
             FaceTarget();
-            if (_canAttack == true)
+            if (_canAttack)
             {
                 if (target.TryGetComponent(out IDamageable damageable) && !target.GetComponent<AI>().Health.isDead)
                 {
@@ -72,7 +72,8 @@ public class Attack : State
 
     private void FaceTarget()
     {
-        npc.transform.LookAt(new Vector3(target.position.x, npc.transform.position.y, target.position.z));
+        var position = target.position;
+        npc.transform.LookAt(new Vector3(position.x, npc.transform.position.y, position.z));
     }
     
     public override void Exit()
