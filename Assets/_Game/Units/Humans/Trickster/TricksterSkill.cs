@@ -16,20 +16,10 @@ public class TricksterSkill : Spell
         _target = GetComponent<AIDestinationSetter>().target;
         _target.GetComponent<AI>().Health.ReceiveDamage(50);
         GetComponent<Mana>().currentMana = 0;
-        CheckTargetStatus();
     }
     public void AE_ToggleRootMotion()
     {
         Animator anim = GetComponent<Animator>();
         anim.applyRootMotion = !anim.applyRootMotion;
-    }
-
-    private void CheckTargetStatus()
-    {
-        if (_target.GetComponent<AI>().Health.isDead)
-        {
-            _target = null;
-            GetComponent<AI>().SetStateChase();
-        }
     }
 }
