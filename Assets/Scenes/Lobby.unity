@@ -9285,7 +9285,6 @@ MonoBehaviour:
     - level: HumanLevel01
       units:
       - {fileID: 11400000, guid: 46a3fc5c5351ecd458dc79674968b94c, type: 2}
-      - {fileID: 11400000, guid: a1adba9953a25e24797023fb40259e60, type: 2}
       - {fileID: 11400000, guid: dc46641803b0c2c4ab5a817a58418828, type: 2}
     levelButtons:
     - {fileID: 3193540481470421725}

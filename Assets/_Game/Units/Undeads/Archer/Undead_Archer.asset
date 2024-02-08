@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa79abfd933b914693f193775c0b50b, type: 3}
+  m_Name: Undead_Archer
+  m_EditorClassIdentifier: 
+  unitName: Undead Archer
+  unitDescription: 
+  unitIcon: {fileID: 21300000, guid: f008857e434b98b4eaabda1fd6af3059, type: 3}
+  unitID: 206
+  unitPrefab: {fileID: 5234680450141715343, guid: eb94c48cbb9397047afcb08041797db3,
+    type: 3}
+  unitType: 0
+  unitRace: 3
+  unitBaseDamage: 8
+  unitBaseHealth: 60
+  unitBaseMana: 1000
+  unitLevel: 1
+  unitExperience: 0
+  unitStaminaCost: 4
+  unitAttackCooldown: 3
+  unitDetectionRadius: 7
+  unitStarCount: 0
+  unitTier: 0
+  unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}

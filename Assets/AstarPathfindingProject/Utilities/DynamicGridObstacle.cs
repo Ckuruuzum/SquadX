@@ -23,7 +23,7 @@ namespace Pathfinding {
 	/// See: graph-updates (view in online documentation for working links)
 	/// See: navmeshcutting (view in online documentation for working links)
 	/// </summary>
-	[HelpURL("http://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_dynamic_grid_obstacle.php")]
+	[HelpURL("https://arongranberg.com/astar/documentation/stable/class_pathfinding_1_1_dynamic_grid_obstacle.php")]
 	public class DynamicGridObstacle : GraphModifier {
 		/// <summary>Collider to get bounds information from</summary>
 		Collider coll;
@@ -108,7 +108,7 @@ namespace Pathfinding {
 			if (!Application.isPlaying) return;
 
 			if (coll == null && coll2D == null) {
-				Debug.LogError("Removed collider from DynamicGridObstacle", this);
+				//Debug.LogError("Removed collider from DynamicGridObstacle", this);
 				enabled = false;
 				return;
 			}

@@ -39,6 +39,9 @@ MonoBehaviour:
     - m_gameObject: {fileID: 0}
       m_enabled: 1
       m_disableChildren: 1
+    - m_gameObject: {fileID: 0}
+      m_enabled: 1
+      m_disableChildren: 1
     m_optimizeCommands:
     - m_enabled: 1
       m_name: Small Objects

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa79abfd933b914693f193775c0b50b, type: 3}
+  m_Name: Undead_TourmentedSoul
+  m_EditorClassIdentifier: 
+  unitName: TourmentedSoul
+  unitDescription: 
+  unitIcon: {fileID: 21300000, guid: b4d7444b817844daea1a96a7d8770022, type: 3}
+  unitID: 207
+  unitPrefab: {fileID: 832587334770961874, guid: 876e18b98de1471439d7216238b276a9,
+    type: 3}
+  unitType: 0
+  unitRace: 0
+  unitBaseDamage: 5
+  unitBaseHealth: 30
+  unitBaseMana: 1000
+  unitLevel: 1
+  unitExperience: 0
+  unitStaminaCost: 0
+  unitAttackCooldown: 2
+  unitStarCount: 0
+  unitTier: 0
+  unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}

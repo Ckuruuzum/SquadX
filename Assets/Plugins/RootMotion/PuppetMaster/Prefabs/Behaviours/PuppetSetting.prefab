@@ -182,7 +182,7 @@ MonoBehaviour:
       knockOutDistance: 100
       puppetMaterial: {fileID: 0}
       unpinnedMaterial: {fileID: 0}
-  knockOutDistance: 1.5
+  knockOutDistance: 2
   unpinnedMuscleWeightMlp: 0.4
   maxRigidbodyVelocity: 10
   pinWeightThreshold: 1

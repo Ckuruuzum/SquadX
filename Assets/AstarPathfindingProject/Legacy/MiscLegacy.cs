@@ -1,6 +1,5 @@
 using UnityEngine;
 using Pathfinding.Util;
-using System;
 
 namespace Pathfinding {
 	// Obsolete methods in AIPath
@@ -45,12 +44,7 @@ namespace Pathfinding {
 		public Vector3 CalculateVelocity (Vector3 position) {
 			return desiredVelocity;
 		}
-
-        public static implicit operator AIPath(Path v)
-        {
-            throw new NotImplementedException();
-        }
-    }
+	}
 
 	// Obsolete methods in RichAI
 	public partial class RichAI {
