@@ -15,7 +15,7 @@ public class PlayManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        Application.targetFrameRate = 300;
+        Application.targetFrameRate = 144;
     }
 
     private void Start()
@@ -26,13 +26,6 @@ public class PlayManager : MonoBehaviour
 
     public void SwitchSpawnBoxStatus()
     {
-        if (spawnBoxContainer.activeInHierarchy)
-        {
-            spawnBoxContainer.SetActive(false);
-        }
-        else
-        {
-            spawnBoxContainer.SetActive(true);
-        }
+        spawnBoxContainer.SetActive(!spawnBoxContainer.activeInHierarchy);
     }
 }

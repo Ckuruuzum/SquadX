@@ -16,7 +16,9 @@ MonoBehaviour:
   unitDescription: 
   unitIcon: {fileID: 21300000, guid: c2d4a61fc5ecb44c081ebd99855672f0, type: 3}
   unitID: 203
-  unitPrefab: {fileID: 1498416814788508020, guid: 367817455eaf106469d7ed422549e82e,
+  unitPrefabAlly: {fileID: 1498416814788508020, guid: 1ea6eb974699774448138bd317f54890,
+    type: 3}
+  unitPrefabEnemy: {fileID: 1498416814788508020, guid: 3a02fbe645c2dd64499bbfc9bbcf8a1d,
     type: 3}
   unitType: 0
   unitRace: 3
@@ -27,6 +29,7 @@ MonoBehaviour:
   unitExperience: 0
   unitStaminaCost: 3
   unitAttackCooldown: 2
+  unitDetectionRadius: 3
   unitStarCount: 0
   unitTier: 0
   unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}

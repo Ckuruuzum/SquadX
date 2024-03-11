@@ -16,18 +16,20 @@ MonoBehaviour:
   unitDescription: 
   unitIcon: {fileID: 21300000, guid: c85b3db89c0da4ae6beaf3dc60f15b89, type: 3}
   unitID: 204
-  unitPrefab: {fileID: 2789645279557761665, guid: edf5ed1b9e9f20945907ea4958eb4f0e,
+  unitPrefabAlly: {fileID: 2789645279557761665, guid: 9277825d4acc0a142bf0d8127a3aece1,
+    type: 3}
+  unitPrefabEnemy: {fileID: 2789645279557761665, guid: 218a9a3019e05944fa3fa6ec8a886b33,
     type: 3}
   unitType: 0
   unitRace: 3
   unitBaseDamage: 5
   unitBaseHealth: 90
-  unitBaseMana: 1000
+  unitBaseMana: 10000
   unitLevel: 1
   unitExperience: 0
   unitStaminaCost: 3
   unitAttackCooldown: 2
-  unitDetectionRadius: 5
+  unitDetectionRadius: 3
   unitStarCount: 0
   unitTier: 0
   unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}

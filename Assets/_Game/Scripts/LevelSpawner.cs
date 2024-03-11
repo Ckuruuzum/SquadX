@@ -30,7 +30,7 @@ public class LevelSpawner : MonoBehaviour
         {
             _spamTimer = Random.Range(10, 20);
             tmpUnit = level.units[Random.Range(0, level.units.Length)];
-            UnitManager.instance.SpawnUnit(tmpUnit, UnitManager.TEAM.Enemy, tmpUnit.unitPrefab, Random.Range(0, 3));
+            UnitManager.instance.SpawnUnit(tmpUnit, UnitManager.TEAM.Enemy, tmpUnit.unitPrefabEnemy, Random.Range(0, 3));
             staminaHandler.DecreaseStaminaValue(staminaHandler.GetEnemyStaminaValue(), tmpUnit.unitStaminaCost, UnitManager.TEAM.Enemy);
         }
     }

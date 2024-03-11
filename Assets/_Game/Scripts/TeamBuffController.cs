@@ -109,15 +109,15 @@ public class TeamBuffController : MonoBehaviour
             case UnitManager.TEAM.Ally:
                 if (isUndeadAllyBuffActive)
                 {
-                    GameObject tmpUnit = Instantiate(_tourmentedSoul.unitPrefab, unitPos.GetChild(2).position, Quaternion.identity);
-                    tmpUnit.transform.GetChild(2).GetComponent<AI>().SetUnit(_tourmentedSoul, 1, 8, "EnemyUnit", new Color32(0, 255, 0, 255));
+                    GameObject tmpUnit = Instantiate(_tourmentedSoul.unitPrefabAlly, unitPos.GetChild(2).position, Quaternion.identity);
+                    tmpUnit.transform.GetChild(2).GetComponent<AI>().SetUnit(_tourmentedSoul, 1, 8, "EnemyUnit");
                 }
                 break;
             case UnitManager.TEAM.Enemy:
                 if (isUndeadEnemyBuffActive)
                 {
-                    GameObject tmpUnitEnemy = Instantiate(_tourmentedSoul.unitPrefab, unitPos.GetChild(2).position, Quaternion.identity);
-                    tmpUnitEnemy.transform.GetChild(2).GetComponent<AI>().SetUnit(_tourmentedSoul, 2, 7, "AllyUnit", new Color32(255, 0, 0, 255));
+                    GameObject tmpUnitEnemy = Instantiate(_tourmentedSoul.unitPrefabEnemy, unitPos.GetChild(2).position, Quaternion.identity);
+                    tmpUnitEnemy.transform.GetChild(2).GetComponent<AI>().SetUnit(_tourmentedSoul, 2, 7, "AllyUnit");
                 }
                 break;
         }

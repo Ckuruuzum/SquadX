@@ -1,5 +1,4 @@
 using Pathfinding;
-using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,15 +16,5 @@ public class GusSkill : Spell
         _target = GetComponent<AIDestinationSetter>().target;
         _target.GetComponent<AI>().Health.ReceiveDamage(50);
         GetComponent<Mana>().currentMana = 0;
-        //CheckTargetStatus();
-    }
-
-    private void CheckTargetStatus()
-    {
-        if (_target.GetComponent<AI>().Health.isDead)
-        {
-            _target = null;
-            GetComponent<AI>().SetStateChase();
-        }
     }
 }

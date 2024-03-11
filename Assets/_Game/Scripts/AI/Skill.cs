@@ -1,5 +1,4 @@
 using Pathfinding;
-using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,9 +6,8 @@ using UnityEngine;
 
 public class Skill : State
 {
-    public Skill(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai,
-        PuppetMaster puppetMaster)
-        : base(npc, anim, target, unit, path, ai, puppetMaster)
+    public Skill(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
+        : base(npc, anim, target, unit, path, ai)
     {
         name = STATE.SKILL;
     }
@@ -17,7 +15,7 @@ public class Skill : State
     private float animationLength = 10;
     private bool timeAcquired = false;
 
-    public override void Enter()
+    protected override void Enter()
     {
         //Debug.Log("EnteringSkill");
         anim.SetTrigger("isSkill");
@@ -25,7 +23,7 @@ public class Skill : State
         base.Enter();
     }
 
-    public override void Update()
+    protected override void Update()
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Skill") && !timeAcquired)
         {
@@ -40,18 +38,18 @@ public class Skill : State
         {
             if (target == null)
             {
-                nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
+                nextState = new Chase(npc, anim, target, unit, path, ai);
                 stage = EVENT.EXIT;
             }
             else
             {
-                nextState = new Attack(npc, anim, target, unit, path, ai, puppetMaster);
+                nextState = new Attack(npc, anim, target, unit, path, ai);
                 stage = EVENT.EXIT;
             }
         }
     }
 
-    public override void Exit()
+    protected override void Exit()
     {
         //Debug.Log("ExitingSkill");
         anim.ResetTrigger("isSkill");

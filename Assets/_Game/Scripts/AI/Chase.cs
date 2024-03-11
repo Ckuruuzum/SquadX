@@ -1,20 +1,19 @@
 using Pathfinding;
-using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Chase : State
 {
-    public Chase(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai, PuppetMaster puppetMaster)
-        : base(npc, anim, target, unit, path, ai, puppetMaster)
+    public Chase(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
+        : base(npc, anim, target, unit, path, ai)
     {
         name = STATE.CHASE;
     }
 
     private float _dist;
 
-    public override void Enter()
+    protected override void Enter()
     {
         anim.SetTrigger("isChasing");
         //Debug.Log("ChaseEnter");
@@ -22,11 +21,12 @@ public class Chase : State
         base.Enter();
     }
 
-    public override void Update()
+    protected override void Update()
     {
-        if (DistanceBetweenTarget() <= npc.GetComponent<AIPath>().endReachedDistance && ai.GetComponent<AIDestinationSetter>().target != null)
+        if (DistanceBetweenTarget() <= npc.GetComponent<AIPath>().endReachedDistance &&
+            ai.GetComponent<AIDestinationSetter>().target != null)
         {
-            nextState = new Attack(npc, anim, target, unit, path, ai, puppetMaster);
+            nextState = new Attack(npc, anim, target, unit, path, ai);
             stage = EVENT.EXIT;
         }
         else
@@ -35,7 +35,7 @@ public class Chase : State
         }
     }
 
-    public override void Exit()
+    protected override void Exit()
     {
         anim.ResetTrigger("isChasing");
         //Debug.Log("ChaseExit");
@@ -66,7 +66,7 @@ public class Chase : State
         }
     }
 
-    private Transform FindClosestTarget()
+    private void FindClosestTarget()
     {
         if (ai.team == AI.TEAM.ALLY)
         {
@@ -84,12 +84,11 @@ public class Chase : State
                         //closestDistance = distance;
                         closestTarget = enemyUnits[i];
                     }
-                    SetTarget(closestTarget.transform);
+
+                    if (closestTarget != null) SetTarget(closestTarget.transform);
                     //Debug.LogWarning(target);
-                    return target;
                 }
             }
-            return null;
         }
         else if (ai.team == AI.TEAM.ENEMY)
         {
@@ -107,18 +106,11 @@ public class Chase : State
                         //closestDistance = distance;
                         closestTarget = enemyUnits[i];
                     }
-                    SetTarget(closestTarget.transform);
-                    //Debug.LogWarning(target);
-                    return target;
+
+                    if (closestTarget != null) SetTarget(closestTarget.transform);
                 }
             }
-            return null;
         }
-        else
-            return null;
-
-
-
     }
 
     private float DistanceBetweenTarget()
@@ -128,6 +120,7 @@ public class Chase : State
             _dist = Vector3.Distance(npc.transform.position, target.position);
             return _dist;
         }
+
         return 100;
     }
 
@@ -136,5 +129,4 @@ public class Chase : State
         target = targetTransform;
         ai.GetComponent<AIDestinationSetter>().target = target;
     }
-
 }

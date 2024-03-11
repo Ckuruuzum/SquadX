@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaa79abfd933b914693f193775c0b50b, type: 3}
+  m_Name: Dummy
+  m_EditorClassIdentifier: 
+  unitName: Dummy
+  unitDescription: 
+  unitIcon: {fileID: 0}
+  unitID: 0
+  unitPrefabAlly: {fileID: 0}
+  unitPrefabEnemy: {fileID: 0}
+  unitType: 0
+  unitRace: 0
+  unitBaseDamage: 0
+  unitBaseHealth: 10000
+  unitBaseMana: 10000
+  unitLevel: 0
+  unitExperience: 0
+  unitStaminaCost: 0
+  unitAttackCooldown: 10
+  unitDetectionRadius: 5
+  unitStarCount: 0
+  unitTier: 0
+  unitCardDatabase: {fileID: 11400000, guid: 752d8e11a14a6d64c95a218a2398ca5d, type: 2}

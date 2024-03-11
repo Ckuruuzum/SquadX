@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Pathfinding;
-using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -8,8 +7,8 @@ using UnityEngine;
 
 public class Attack : State
 {
-    public Attack(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai, PuppetMaster puppetMaster)
-        : base(npc, anim, target, unit, path, ai, puppetMaster)
+    public Attack(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
+        : base(npc, anim, target, unit, path, ai)
     {
         name = STATE.ATTACK;
     }
@@ -18,7 +17,8 @@ public class Attack : State
     private float _unitCooldown;
     private bool _timeAcquired;
     private float _animationLength = 10;
-    public override void Enter()
+
+    protected override void Enter()
     {
         //Debug.Log("AttackEnter");
         //anim.SetTrigger("isAttacking");
@@ -26,7 +26,7 @@ public class Attack : State
         base.Enter();
     }
 
-    public override void Update()
+    protected override void Update()
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") && !_timeAcquired)
         {
@@ -46,7 +46,7 @@ public class Attack : State
 
         if (target == null)
         {
-            nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
+            nextState = new Chase(npc, anim, target, unit, path, ai);
             stage = EVENT.EXIT;
         }
         else
@@ -75,8 +75,8 @@ public class Attack : State
         var position = target.position;
         npc.transform.LookAt(new Vector3(position.x, npc.transform.position.y, position.z));
     }
-    
-    public override void Exit()
+
+    protected override void Exit()
     {
         anim.ResetTrigger("isAttacking");
         //Debug.Log("AttackExit");

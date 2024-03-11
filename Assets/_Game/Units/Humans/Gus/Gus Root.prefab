@@ -4902,6 +4902,7 @@ MonoBehaviour:
   team: 2
   mana: {fileID: 2051531670679514472}
   puppetMaster: {fileID: 2051531669995954339}
+  skinnedMesh: {fileID: 2051531669210124755}
 --- !u!114 &2051531670679514391
 MonoBehaviour:
   m_ObjectHideFlags: 0

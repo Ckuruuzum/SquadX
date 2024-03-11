@@ -1,9 +1,7 @@
 using Pathfinding;
-using RootMotion.Dynamics;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using RootMotion.Dynamics;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -24,11 +22,10 @@ public class AI : MonoBehaviour, IDamageable
     private AIDestinationSetter _destinationSetter;
     private Health _health;
     public Mana mana;
-    public PuppetMaster puppetMaster;
 
     public Health Health => _health;
 
-    
+
     private void Start()
     {
         _anim = GetComponent<Animator>();
@@ -36,7 +33,6 @@ public class AI : MonoBehaviour, IDamageable
         _health = GetComponent<Health>();
         mana = GetComponent<Mana>();
         _destinationSetter = GetComponent<AIDestinationSetter>();
-        puppetMaster.gameObject.SetActive(true);
         //SetUnit(_unit, 1, 8);
         SetStateIdle();
     }
@@ -50,10 +46,12 @@ public class AI : MonoBehaviour, IDamageable
     [Serializable]
     public enum TEAM
     {
-        DEFAULT = 0, ALLY = 1, ENEMY = 2
+        DEFAULT = 0,
+        ALLY = 1,
+        ENEMY = 2
     }
 
-    public void SetUnit(Unit unit, int teamIndex, int layer, string _layerMask, Color32 highlightColor)
+    public void SetUnit(Unit unit, int teamIndex, int layer, string _layerMask)
     {
         this.unit = unit;
         team = (TEAM)teamIndex;
@@ -70,26 +68,26 @@ public class AI : MonoBehaviour, IDamageable
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 5);
+        Gizmos.DrawSphere(transform.position, unit.unitDetectionRadius);
     }
 
     public void SetStateDead()
     {
-        _currentState = new Dead(gameObject, _anim, _destinationSetter.target, unit, _path, this, puppetMaster);
+        _currentState = new Dead(gameObject, _anim, _destinationSetter.target, unit, _path, this);
     }
 
     public void SetStateSkill()
     {
-        _currentState = new Skill(gameObject, _anim, _destinationSetter.target, unit, _path, this, puppetMaster);
+        _currentState = new Skill(gameObject, _anim, _destinationSetter.target, unit, _path, this);
     }
 
     public void SetStateIdle()
     {
-        _currentState = new Idle(gameObject, _anim, _destinationSetter.target, unit, _path, this, puppetMaster);
+        _currentState = new Idle(gameObject, _anim, _destinationSetter.target, unit, _path, this);
     }
 
     public void SetStateChase()
     {
-        _currentState = new Chase(gameObject, _anim, _destinationSetter.target, unit, _path, this, puppetMaster);
+        _currentState = new Chase(gameObject, _anim, _destinationSetter.target, unit, _path, this);
     }
 }

@@ -2319,7 +2319,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2882400416411822836}
-  - component: {fileID: 2882400416411822843}
   m_Layer: 7
   m_Name: SM_Chr_ScifiWorlds_Soldier_Male_02
   m_TagString: Untagged
@@ -2344,26 +2343,6 @@ Transform:
   m_Father: {fileID: 2882400416448848393}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &2882400416411822843
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2882400416411822837}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e274402e4c839934c817fc0664347c81, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2882400416448848394
 GameObject:
   m_ObjectHideFlags: 0
@@ -2584,6 +2563,7 @@ MonoBehaviour:
   team: 1
   mana: {fileID: 0}
   puppetMaster: {fileID: 2882400416503700293}
+  skinnedMesh: {fileID: 0}
 --- !u!114 &2882400416448848398
 MonoBehaviour:
   m_ObjectHideFlags: 0

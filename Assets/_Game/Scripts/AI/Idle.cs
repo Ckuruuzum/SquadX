@@ -1,18 +1,17 @@
 using Pathfinding;
-using RootMotion.Dynamics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Idle : State
 {
-    public Idle(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai, PuppetMaster puppetMaster)
-        : base(npc, anim, target, unit, path, ai, puppetMaster)
+    public Idle(GameObject npc, Animator anim, Transform target, Unit unit, AIPath path, AI ai)
+        : base(npc, anim, target, unit, path, ai)
     {
         name = STATE.IDLE;
     }
 
-    public override void Enter()
+    protected override void Enter()
     {
         anim.SetTrigger("isIdle");
         //Debug.Log("IdleEnter");
@@ -21,14 +20,14 @@ public class Idle : State
 
     }
 
-    public override void Update()
+    protected override void Update()
     {
         if (target != null) return;
-        nextState = new Chase(npc, anim, target, unit, path, ai, puppetMaster);
+        nextState = new Chase(npc, anim, target, unit, path, ai);
         stage = EVENT.EXIT;
     }
 
-    public override void Exit()
+    protected override void Exit()
     {
         anim.ResetTrigger("isIdle");
         //Debug.Log("IdleExit");

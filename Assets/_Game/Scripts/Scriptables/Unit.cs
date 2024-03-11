@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,12 +7,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Unit", menuName = "SquadX/Unit")]
 public class Unit : ScriptableObject
 {
+   
+
     [Header("General")]
     public string unitName;
     public string unitDescription;
     public Sprite unitIcon;
     public int unitID;
-    public GameObject unitPrefab;
+    public GameObject unitPrefabAlly;
+    public GameObject unitPrefabEnemy;
 
     [Header("Stats")]
     public UnitType unitType;
@@ -28,6 +32,8 @@ public class Unit : ScriptableObject
     [Header("Label")]
     public UnitStarCount unitStarCount;
     public UnitTier unitTier;
+    
+     
 
     [Header("DataBase")]
     public CardDatabase unitCardDatabase;
